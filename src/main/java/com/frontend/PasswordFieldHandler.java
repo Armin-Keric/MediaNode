@@ -13,12 +13,6 @@ public class PasswordFieldHandler {
 
         boolean currentlyHidden = passwordField.isVisible();
 
-        if (currentlyHidden) {
-            visibleField.setText(passwordField.getText());
-        } else {
-            passwordField.setText(visibleField.getText());
-        }
-
         passwordField.setVisible(!currentlyHidden);
         passwordField.setManaged(!currentlyHidden);
 
