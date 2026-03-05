@@ -1,40 +1,21 @@
 package com.backend;
 
+import java.io.FileNotFoundException;
 import java.sql.*;
 
 public class JDBC {
-    private static String url = "jdbc:postgresql://localhost:5432/media_collection?" + "user=user&password=password";
+    private String url = "jdbc:postgresql://localhost:5432/media_collection?" + "user=user&password=password";
 
-    protected static void openConnection() {
+    protected void openConnection(String query) {
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()
         ) {
-
             System.out.println("A");
 
-            //String query = "INSERT INTO media (id, title, type) VALUES (, 'Cyberpunk', 'game')";
-            String query_search = "SELECT * FROM media m";
-
-            //with this object you can create a SQL statement
-            //Execution of the query
-            //statement.executeUpdate(query);
-            //statement.executeUpdate(query_search);
-
-            //ResultSet resultSet = statement.executeQuery(query);
-            ResultSet resultSet = statement.executeQuery(query_search);
-
-
-            while (resultSet.next()) {
-                System.out.println(resultSet);
-            }
-
+            //executes statement/SQL query
+            statement.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        //test
-        openConnection();
     }
 }
