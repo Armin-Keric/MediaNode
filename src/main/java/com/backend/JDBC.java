@@ -12,8 +12,10 @@ public class JDBC {
         ) {
             System.out.println("A");
 
-            //executes statement/SQL query
+            //execute Update for Inserts or generally changing values in table
             statement.executeUpdate(query);
+            //ResultSet for SELECTS....
+            //ResultSet resultSet = statement.executeQuery(search_query);
         } catch (SQLException e) {
             e.printStackTrace();
         }

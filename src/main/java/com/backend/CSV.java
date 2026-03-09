@@ -29,7 +29,6 @@ public class CSV {
                 query_media = "INSERT INTO media (title, release_date, type, description, img_url) VALUES" + "(" + "'" + values[0].replace("'", "") + "'" + "," + "'" + values[1] + "'" + "," + "'" + values[2] + "'" + "," + "'" + values[3].replace("'", "") + "'" + "," + "'" + values[4] + "'" + ")" + ";";
                 //query_game_details = "INSERT INTO game_details (id, playtime, platform, publisher, multiplayer) VALUES" + "(" + "'" + values[0].replace("'", "") + "'" + "," + "'" + values[1] + "'" + "," + "'" + values[2] + "'" + "," + "'" + values[3].replace("'", "") + "'" + "," + "'" + values[4] + "'" + ")" + ";";
                 connection.openConnection(query_media);
-
                 System.out.println(query_media);
             }
         } catch (IOException e) {
