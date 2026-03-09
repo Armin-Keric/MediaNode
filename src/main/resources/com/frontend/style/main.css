@@ -1,0 +1,7 @@
+/*
+only colors here.
+No layouting... flex, grid.... we'll do that with scene builder, panes etc.
+ */
+.button{
+ -fx-background-color: red;
+}
