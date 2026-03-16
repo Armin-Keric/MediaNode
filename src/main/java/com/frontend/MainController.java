@@ -17,7 +17,7 @@ public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
 
-    private final String CONTENT_VIEW_FOLDER = "content_view/";
+    protected final String CONTENT_VIEW_FOLDER = "view/content/";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,7 +46,7 @@ public class MainController implements Initializable {
      *
      * @param view fxml file in resources/com/frontend/'CONTENT_VIEW_FOLDER'
      */
-    private void loadContentView(String view) {
+    protected void loadContentView(String view) {
         try {
             FXMLLoader contentLoader = new FXMLLoader(getClass().getResource(CONTENT_VIEW_FOLDER + view));
             Node tmp = contentLoader.load();
