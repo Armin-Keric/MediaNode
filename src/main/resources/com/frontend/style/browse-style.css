@@ -1,0 +1,5 @@
+.descriptionHBox,
+.localMenuBarHBox {
+    /* Space between child elements */
+    -fx-spacing: 10;
+}
