@@ -7,4 +7,5 @@ public class AuthenticationViewController extends MainController {
     private String getContentViewFolder() {
         return "view/authentication/";
     }
+
 }

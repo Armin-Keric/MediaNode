@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.frontend.controller.authentication.AuthenticationController"
+      alignment="CENTER"
+      spacing="10">
+
+    <Label text="Signup"/>
+
+    <TextField fx:id="signupUsernameField" promptText="Username"/>
+    <PasswordField fx:id="signupPasswordField" promptText="Password"/>
+    <!--<TextField fx:id="signupVisiblePasswordField" promptText="Repeat Password" managed="false" visible="false"/>-->
+
+    <PasswordField fx:id="signupPasswordRepeatField" promptText="Repeat Password"/>
+
+    <Label fx:id="warningLabel"/>
+
+    <Button text="Create Account" onAction="#onSignupClicked"/>
+
+</VBox>
