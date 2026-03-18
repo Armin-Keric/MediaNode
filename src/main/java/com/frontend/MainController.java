@@ -17,8 +17,6 @@ public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
 
-    private final String CONTENT_VIEW_FOLDER = "content_view/";
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // load a default site
@@ -36,7 +34,7 @@ public class MainController implements Initializable {
         String target = src.getId();
 
         if (!target.isEmpty()) {
-            System.out.println("Trying to load: " + getClass().getResource(CONTENT_VIEW_FOLDER + target));
+            System.out.println("Trying to load: " + getClass().getResource(getContentViewFolder() + target));
             loadContentView(target);
         }
     }
@@ -46,9 +44,9 @@ public class MainController implements Initializable {
      *
      * @param view fxml file in resources/com/frontend/'CONTENT_VIEW_FOLDER'
      */
-    private void loadContentView(String view) {
+    protected void loadContentView(String view) {
         try {
-            FXMLLoader contentLoader = new FXMLLoader(getClass().getResource(CONTENT_VIEW_FOLDER + view));
+            FXMLLoader contentLoader = new FXMLLoader(getClass().getResource(getContentViewFolder() + view));
             Node tmp = contentLoader.load();
 
             AnchorPane.setTopAnchor(tmp, 0.0);
@@ -61,5 +59,9 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             System.out.println("[MainController] Could not find target fxml");
         }
+    }
+
+    private String getContentViewFolder() {
+        return "view/content/";
     }
 }
