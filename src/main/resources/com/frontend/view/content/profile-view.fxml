@@ -13,32 +13,31 @@
 <?import javafx.scene.shape.Circle?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.ProfileViewController">
-   <children>
-      <Label layoutX="85.0" layoutY="62.0" />
-      <Circle fx:id="profileIcon" fill="DODGERBLUE" layoutX="99.0" layoutY="135.0" radius="79.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="userNameLabel" layoutX="20.0" layoutY="234.0" prefHeight="17.0" prefWidth="158.0" text="USERNAME" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="422.0" />
-      <Label fx:id="biographyLabel" layoutX="20.0" layoutY="259.0" prefHeight="17.0" prefWidth="158.0" text="BIOGRAPHY" />
-      <GridPane fx:id="favMediaGridPane" gridLinesVisible="true" layoutX="249.0" layoutY="103.0" prefHeight="95.0" prefWidth="273.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="78.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <BarChart fx:id="userGraphChart" layoutX="-1.0" layoutY="276.0" prefHeight="148.0" prefWidth="165.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="401.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
-      <ListView fx:id="overViewListView" layoutX="249.0" layoutY="234.0" prefHeight="171.0" prefWidth="273.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="78.0" />
-      <AnchorPane fx:id="contentPane" layoutX="249.0" layoutY="24.0" prefHeight="65.0" prefWidth="273.0" />
-      <Button id="browse-view.fxml" layoutX="172.0" layoutY="31.0" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Button" />
-   </children>
+    <children>
+        <Label layoutX="85.0" layoutY="62.0" />
+        <Circle fx:id="profileIcon" fill="DODGERBLUE" layoutX="99.0" layoutY="135.0" radius="79.0" stroke="BLACK" strokeType="INSIDE" />
+        <Label fx:id="userNameLabel" layoutX="20.0" layoutY="234.0" prefHeight="17.0" prefWidth="158.0" text="USERNAME" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="422.0" />
+        <Label fx:id="biographyLabel" layoutX="20.0" layoutY="259.0" prefHeight="17.0" prefWidth="158.0" text="BIOGRAPHY" />
+        <GridPane fx:id="favMediaGridPane" gridLinesVisible="true" layoutX="249.0" layoutY="103.0" prefHeight="95.0" prefWidth="273.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="78.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
+        <BarChart fx:id="userGraphChart" layoutX="-1.0" layoutY="276.0" prefHeight="148.0" prefWidth="165.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="401.0">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </BarChart>
+        <ListView fx:id="overViewListView" layoutX="249.0" layoutY="234.0" prefHeight="171.0" prefWidth="273.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="78.0" />
+        <AnchorPane fx:id="contentPane" layoutX="249.0" layoutY="24.0" prefHeight="65.0" prefWidth="273.0" />
+    </children>
 </AnchorPane>
