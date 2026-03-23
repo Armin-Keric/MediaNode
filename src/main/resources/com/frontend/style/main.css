@@ -1,7 +1,30 @@
 /*
 only colors here.
 No layouting... flex, grid.... we'll do that with scene builder, panes etc.
- */
-.button{
- -fx-background-color: red;
+*/
+
+#menuBarHBox {
+ -fx-border-color: #AB4749FF;
+ -fx-border-width: 0 0 2 0;
+
+ -fx-padding: 10;
+ -fx-spacing: 15;
+}
+
+.toggle-button {
+ /* transparent */
+ -fx-background-color: #FF000000;
+
+ -fx-font-family: "Consolas";
+ -fx-font-size: 10pt;
+ -fx-text-background-color: #21262DFF;
+}
+
+.toggle-button:selected {
+ -fx-background-color: #AB4749FF;
+ -fx-text-fill: white;
+}
+
+.toggle-button:hover {
+ -fx-background-color: #C2545666;
 }
