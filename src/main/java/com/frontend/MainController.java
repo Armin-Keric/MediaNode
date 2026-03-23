@@ -66,6 +66,6 @@ public class MainController implements Initializable {
     }
 
     private String getContentViewFolder() {
-        return "view/content/";
+        return "/com/frontend/view/content/";
     }
 }

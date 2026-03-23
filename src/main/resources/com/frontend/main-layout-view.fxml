@@ -13,8 +13,8 @@
             <ToggleButton id="browse-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Browse" />
             <ToggleButton id="kas" mnemonicParsing="false" text="Auth  (tmp)" />
             <Region id="groupIgnore" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <ToggleButton id="profile-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Profile" />
+            <ToggleButton id="profile-layout-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Profile" />
          </children></HBox>
-      <AnchorPane fx:id="contentPane" layoutX="10.0" layoutY="50.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
+      <AnchorPane fx:id="contentPane" layoutX="10.0" layoutY="70.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
    </children>
 </AnchorPane>
