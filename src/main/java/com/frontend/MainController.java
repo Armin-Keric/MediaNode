@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -19,7 +18,7 @@ public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
 
-    private final ToggleGroup menuBarToggleGroup = new ToggleGroup();
+    protected final ToggleGroup menuBarToggleGroup = new ToggleGroup();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

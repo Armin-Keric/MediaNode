@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 
+<?import javafx.scene.control.ToggleButton?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.ProfileLayoutViewController">
    <children>
       <HBox fx:id="menuBarHBox" layoutX="10.0" layoutY="10.0" prefHeight="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Button id="profile-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Overview" />
-            <Button id="profile-medialist-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="List" />
+            <ToggleButton id="profile-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Overview" />
+            <ToggleButton id="profile-medialist-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="List" />
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
          </children></HBox>
       <AnchorPane fx:id="contentPane" layoutX="10.0" layoutY="50.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
