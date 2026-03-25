@@ -4,11 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../style/browse-style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.BrowseViewController">
    <children>
+      <AnchorPane fx:id="contentPane" layoutX="5.0" layoutY="217.0" prefHeight="200.0" prefWidth="200.0" />
       <HBox alignment="TOP_CENTER" layoutX="5.0" layoutY="5.0" prefHeight="30.0" styleClass="descriptionHBox" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <Region HBox.hgrow="ALWAYS" />
@@ -29,5 +32,12 @@
             <Region HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
+      <VBox alignment="TOP_CENTER" layoutX="5.0" layoutY="80.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <HBox fx:id="featuredAreaVBox" />
+            <HBox fx:id="friendAreaVBox" />
+            <GridPane fx:id="browseAreaVBox" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
