@@ -3,10 +3,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.frontend.controller.authentication.AuthenticationController"
-      alignment="CENTER"
-      spacing="10">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.frontend.controller.authentication.AuthenticationViewController" alignment="CENTER" spacing="10">
 
     <Label text="Signup"/>
 
