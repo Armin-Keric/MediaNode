@@ -1,7 +1,16 @@
 package com.backend.model;
 
+import com.backend.Database;
+import com.backend.Queries;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Media {
     private Integer id;
@@ -10,6 +19,107 @@ public class Media {
     String type;
     String description;
     String img_url;
+
+    //placeholder
+    private ArrayList<Media> medias;
+    private ArrayList<Media> medias_release;
+    private ArrayList<Media> medias_genres;
+    private ArrayList<Media> medias_type;
+
+    /// //// Pre cached lists for application
+    public static List<Media> medias(String order) throws SQLException {
+        Database database = Database.getInstance();
+        List<Media> results = new ArrayList<>();
+        Connection c = database.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet res = stmt.executeQuery("SELECT * FROM media ORDER BY title " + order);
+
+        while (res.next()) {
+            Media m = new Media(
+                    res.getInt("id"),
+                    res.getString("title"),
+                    res.getObject("release_date", LocalDate.class),
+                    res.getString("type"),
+                    res.getString("description"),
+                    res.getString("img_url")
+            );
+            results.add(m);
+        }
+
+        return results;
+    }
+
+    public List<Media> medias_release(String order) throws SQLException {
+        Database database = Database.getInstance();
+        List<Media> results = new ArrayList<>();
+        Connection c = database.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet res = stmt.executeQuery(" SELECT * FROM media ORDER BY release_date " + order);
+
+        while (res.next()) {
+            Media m = new Media(
+                    res.getInt("id"),
+                    res.getString("title"),
+                    res.getObject("release_date", LocalDate.class),
+                    res.getString("type"),
+                    res.getString("description"),
+                    res.getString("img_url")
+            );
+            results.add(m);
+        }
+
+        return results;
+    }
+
+    public List<Media> medias_genres(String genre) throws SQLException {
+        Database database = Database.getInstance();
+        List<Media> results = new ArrayList<>();
+        Connection c = database.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet res = stmt.executeQuery(" SELECT m.* FROM media m " +
+                " JOIN media_genres mg ON m.id = mg.media_id " +
+                " JOIN genres g ON mg.genre_id = g.genre_id " +
+                " WHERE g.type = '" + genre + "'");
+
+        while (res.next()) {
+            Media m = new Media(
+                    res.getInt("id"),
+                    res.getString("title"),
+                    res.getObject("release_date", LocalDate.class),
+                    res.getString("type"),
+                    res.getString("description"),
+                    res.getString("img_url")
+            );
+            results.add(m);
+        }
+
+        return results;
+    }
+
+    public List<Media> medias_type(String type) throws SQLException {
+        Database database = Database.getInstance();
+        List<Media> results = new ArrayList<>();
+        Connection c = database.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet res = stmt.executeQuery(" SELECT * FROM media WHERE type = '" + type + "' ORDER BY title ASC ");
+
+        while (res.next()) {
+            Media m = new Media(
+                    res.getInt("id"),
+                    res.getString("title"),
+                    res.getObject("release_date", LocalDate.class),
+                    res.getString("type"),
+                    res.getString("description"),
+                    res.getString("img_url")
+            );
+            results.add(m);
+        }
+
+        return results;
+    }
+
+    /// ////////
+
 
     public Media(Integer id, String title, LocalDate release_date, String type, String description, String img_url) {
         this.id = id;
@@ -66,5 +176,10 @@ public class Media {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return getTitle();
     }
 }

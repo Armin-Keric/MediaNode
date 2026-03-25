@@ -5,43 +5,46 @@ import java.sql.*;
 
 
 public class Database {
-    private String url = "mediaLists:postgresql://localhost:5432/media_collection?" + "user=user&password=password";
-    private ResultSet resultSet;
-    private Statement statement;
-    private Queries queries = new Queries();
+    private static Database instance;
+    Connection connection;
 
-    protected void openConnection() throws SQLException {
-        try {
-            Connection connection = DriverManager.getConnection(url);
-            statement = connection.createStatement();
-            System.out.println("Database connection established");
+    private Database() throws SQLException {
+        String url = "jdbc:postgresql://localhost:5432/media_collection?" + "user=user&password=password";
+        connection = DriverManager.getConnection(url);
+    }
 
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static Database getInstance() throws SQLException {
+        if (instance == null) {
+            instance = new Database();
         }
+
+        return instance;
     }
 
-    //Übergabe verläuft im JavaFX Teil!
-    public ResultSet getGenreResultSet(String genre) throws SQLException {
-        String query = queries.getMediaByGenre(genre);
-        return statement.executeQuery(query);
+    public Connection getConnection() {
+        return connection;
     }
 
-    public ResultSet getMediaResultSet(String order) throws SQLException {
-        String query = queries.getMedia(order);
-        return statement.executeQuery(query);
-    }
+    /**
+     //Übergabe verläuft im JavaFX Teil!
+     public ResultSet getGenreResultSet(String genre) throws SQLException {
+     String query = queries.getMediaByGenre(genre);
+     return statement.executeQuery(query);
+     }
 
-    public ResultSet getMediaByTypeResultSet(String type) throws SQLException {
-        String query = queries.getMediaByType(type);
-        return statement.executeQuery(query);
-    }
+     public ResultSet getMediaResultSet(String order) throws SQLException {
+     String query = queries.getMedia(order);
+     return statement.executeQuery(query);
+     }
 
-    public ResultSet getMediaByReleaseDateResultSet(String order) throws SQLException {
-        String query = queries.getMediaByDate(order);
-        return statement.executeQuery(query);
-    }
+     public ResultSet getMediaByTypeResultSet(String type) throws SQLException {
+     String query = queries.getMediaByType(type);
+     return statement.executeQuery(query);
+     }
 
-
+     public ResultSet getMediaByReleaseDateResultSet(String order) throws SQLException {
+     String query = queries.getMediaByDate(order);
+     return statement.executeQuery(query);
+     }
+     **/
 }
