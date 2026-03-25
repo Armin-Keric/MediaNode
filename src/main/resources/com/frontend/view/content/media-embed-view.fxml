@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.MediaViewController">
+   <children>
+      <ImageView fx:id="imageImageView" fitHeight="250.0" fitWidth="200.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <HBox layoutX="14.0" layoutY="286.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <Label fx:id="titleLabel" text="Title Unset" HBox.hgrow="ALWAYS" />
+            <Label fx:id="ratingLabel" text="Title Unset" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <ComboBox fx:id="addToListComboBox" layoutX="446.0" layoutY="15.0" onAction="#onAddToListComboBoxClicked" promptText="+" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+   </children>
+</AnchorPane>
