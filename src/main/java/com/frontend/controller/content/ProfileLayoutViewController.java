@@ -2,6 +2,9 @@ package com.frontend.controller.content;
 
 import com.frontend.MainController;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,6 +13,16 @@ public class ProfileLayoutViewController extends MainController implements Initi
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //here we need to look if it really IS a ToggleButton
+        for (Node node : menuBarHBox.getChildren()) {
+            if (node instanceof ToggleButton && node.getId() != null) {
+                if (!node.getId().equals("groupIgnore") && !node.getId().isEmpty()) {
+                    ToggleButton tmp = (ToggleButton) node;
+                    tmp.setToggleGroup(menuBarToggleGroup);
+                }
+            }
+        }
         loadContentView("profile-view.fxml");
     }
 }
+
