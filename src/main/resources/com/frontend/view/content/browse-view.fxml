@@ -6,37 +6,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../style/browse-style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.BrowseViewController">
    <children>
-      <AnchorPane fx:id="contentPane" layoutX="5.0" layoutY="217.0" prefHeight="200.0" prefWidth="200.0" />
-      <HBox alignment="TOP_CENTER" layoutX="5.0" layoutY="5.0" prefHeight="30.0" styleClass="descriptionHBox" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Region HBox.hgrow="ALWAYS" />
-            <Label maxWidth="150.0" minWidth="150.0" text="tmp" />
-            <Label maxWidth="150.0" minWidth="150.0" text="Type" />
-            <Label maxWidth="150.0" minWidth="150.0" text="Genre" />
-            <Label maxWidth="150.0" minWidth="150.0" text="Year" />
-            <Region HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <HBox alignment="TOP_CENTER" layoutX="5.0" layoutY="40.0" prefHeight="30.0" styleClass="localMenuBarHBox" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">
-         <children>
-            <Region HBox.hgrow="ALWAYS" />
-            <TextField fx:id="searchTextField" maxWidth="150.0" minWidth="150.0" promptText="Search" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="mediaTypeComboBox" maxWidth="150.0" minWidth="150.0" promptText="Any" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="mediaGenreComboBox" maxWidth="150.0" minWidth="150.0" promptText="Any" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="mediaYearComboBox" maxWidth="150.0" minWidth="150.0" promptText="Any" HBox.hgrow="ALWAYS" />
-            <Region HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <VBox alignment="TOP_CENTER" layoutX="5.0" layoutY="80.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
-         <children>
-            <HBox fx:id="featuredAreaVBox" />
-            <HBox fx:id="friendAreaVBox" />
-            <GridPane fx:id="browseAreaVBox" />
+            <HBox alignment="TOP_CENTER" prefHeight="30.0" styleClass="descriptionHBox">
+               <children>
+
+                  <Label maxWidth="150.0" minWidth="150.0" text="tmp" />
+                  <Label maxWidth="150.0" minWidth="150.0" text="Type" />
+                  <Label maxWidth="150.0" minWidth="150.0" text="Genre" />
+                  <Label maxWidth="150.0" minWidth="150.0" text="Year" />
+                  
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="30.0" styleClass="localMenuBarHBox">
+               <children>
+                  <TextField fx:id="searchTextField" maxWidth="150.0" minWidth="150.0" promptText="Search" HBox.hgrow="ALWAYS" />
+                  <ComboBox fx:id="mediaTypeComboBox" maxWidth="150.0" minWidth="150.0" promptText="Any" HBox.hgrow="ALWAYS" />
+                  <ComboBox fx:id="mediaGenreComboBox" maxWidth="150.0" minWidth="150.0" promptText="Any" HBox.hgrow="ALWAYS" />
+                  <ComboBox fx:id="mediaYearComboBox" maxWidth="150.0" minWidth="150.0" promptText="Any" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox fx:id="featuredAreaVBox" alignment="TOP_CENTER" />
+            <HBox fx:id="friendAreaVBox" alignment="TOP_CENTER" />
+            <GridPane fx:id="browseAreaVBox" alignment="TOP_CENTER" />
          </children>
       </VBox>
    </children>

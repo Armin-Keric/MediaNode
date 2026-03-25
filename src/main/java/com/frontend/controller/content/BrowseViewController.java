@@ -38,20 +38,12 @@ public class BrowseViewController extends MainController implements Initializabl
             e.printStackTrace();
         }
 
-        featuredAreaVBox.getChildren().addAll(
-                new AnchorPane(),
-                new AnchorPane(),
-                new AnchorPane(),
-                new AnchorPane(),
-                new AnchorPane()
-        );
+        for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
+            featuredAreaVBox.getChildren().add(new AnchorPane());
+            friendAreaVBox.getChildren().add(new AnchorPane());
 
-        loadView((AnchorPane) featuredAreaVBox.getChildren().get(0), "media-embed-view.fxml", "BrowseController");
-        loadView((AnchorPane) featuredAreaVBox.getChildren().get(1), "media-embed-view.fxml", "BrowseController");
-        loadView((AnchorPane) featuredAreaVBox.getChildren().get(2), "media-embed-view.fxml", "BrowseController");
-        loadView((AnchorPane) featuredAreaVBox.getChildren().get(3), "media-embed-view.fxml", "BrowseController");
-        loadView((AnchorPane) featuredAreaVBox.getChildren().get(4), "media-embed-view.fxml", "BrowseController");
+            loadView((AnchorPane) featuredAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
+            loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
+        }
     }
-
-
 }
