@@ -4,9 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
@@ -19,13 +18,20 @@ public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
 
+    protected final ToggleGroup menuBarToggleGroup = new ToggleGroup();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        for (Node node : menuBarHBox.getChildren()) {
+            if (!node.getId().equals("groupIgnore") && !node.getId().isEmpty()) {
+                ToggleButton tmp = (ToggleButton) node;
+                tmp.setToggleGroup(menuBarToggleGroup);
+            }
+        }
+
         // load a default site
-        loadContentView("authentication-view.fxml");
-
+        loadContentView("home-view.fxml");
     }
-
 
     /**
      * gets the name of the fxml file that should be loaded to `contentPane` from the Button ID
@@ -34,7 +40,7 @@ public class MainController implements Initializable {
      * @param actionEvent clicked Button
      */
     public void onMenuBarButtonClicked(ActionEvent actionEvent) {
-        Button src = (Button) actionEvent.getSource();
+        ToggleButton src = (ToggleButton) actionEvent.getSource();
         String target = src.getId();
 
         if (!target.isEmpty()) {
