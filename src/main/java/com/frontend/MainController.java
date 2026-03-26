@@ -4,8 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
@@ -18,20 +19,13 @@ public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
 
-    protected final ToggleGroup menuBarToggleGroup = new ToggleGroup();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for (Node node : menuBarHBox.getChildren()) {
-            if (!node.getId().equals("groupIgnore") && !node.getId().isEmpty()) {
-                ToggleButton tmp = (ToggleButton) node;
-                tmp.setToggleGroup(menuBarToggleGroup);
-            }
-        }
-
         // load a default site
-        loadContentView("home-view.fxml");
+        loadContentView("authentication-view.fxml");
+
     }
+
 
     /**
      * gets the name of the fxml file that should be loaded to `contentPane` from the Button ID
@@ -40,7 +34,7 @@ public class MainController implements Initializable {
      * @param actionEvent clicked Button
      */
     public void onMenuBarButtonClicked(ActionEvent actionEvent) {
-        ToggleButton src = (ToggleButton) actionEvent.getSource();
+        Button src = (Button) actionEvent.getSource();
         String target = src.getId();
 
         if (!target.isEmpty()) {
@@ -55,6 +49,10 @@ public class MainController implements Initializable {
      * @param view fxml file in resources/com/frontend/'CONTENT_VIEW_FOLDER'
      */
     protected void loadContentView(String view) {
+        loadView(contentPane, view, "MainController");
+    }
+
+    protected void loadView(AnchorPane targetPane, String view, String src) {
         try {
             FXMLLoader contentLoader = new FXMLLoader(getClass().getResource(getContentViewFolder() + view));
             Node tmp = contentLoader.load();
@@ -65,9 +63,9 @@ public class MainController implements Initializable {
             AnchorPane.setBottomAnchor(tmp, 0.0);
 
             // should prevent flickering over .clear();, .add();
-            contentPane.getChildren().setAll(Collections.singleton(tmp));
+            targetPane.getChildren().setAll(Collections.singleton(tmp));
         } catch (IOException e) {
-            System.out.println("[MainController] Could not find target fxml");
+            System.out.printf("[%s] Could not find target fxml", src);
         }
     }
 
