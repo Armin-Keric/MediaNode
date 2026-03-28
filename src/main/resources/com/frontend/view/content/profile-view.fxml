@@ -1,43 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.ProfileViewController">
+<StackPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.ProfileViewController">
     <children>
-        <Label layoutX="85.0" layoutY="62.0" />
-        <Circle fx:id="profileIcon" fill="DODGERBLUE" layoutX="99.0" layoutY="135.0" radius="79.0" stroke="BLACK" strokeType="INSIDE" />
-        <Label fx:id="userNameLabel" layoutX="20.0" layoutY="234.0" prefHeight="17.0" prefWidth="158.0" text="USERNAME" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="422.0" />
-        <Label fx:id="biographyLabel" layoutX="20.0" layoutY="259.0" prefHeight="17.0" prefWidth="158.0" text="BIOGRAPHY" />
-        <GridPane fx:id="favMediaGridPane" gridLinesVisible="true" layoutX="249.0" layoutY="103.0" prefHeight="95.0" prefWidth="273.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="78.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
-        <BarChart fx:id="userGraphChart" layoutX="-1.0" layoutY="276.0" prefHeight="148.0" prefWidth="165.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="401.0">
-            <xAxis>
-                <CategoryAxis side="BOTTOM" />
-            </xAxis>
-            <yAxis>
-                <NumberAxis side="LEFT" />
-            </yAxis>
-        </BarChart>
-        <ListView fx:id="overViewListView" layoutX="249.0" layoutY="234.0" prefHeight="171.0" prefWidth="273.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="78.0" />
-        <AnchorPane fx:id="contentPane" layoutX="249.0" layoutY="24.0" prefHeight="65.0" prefWidth="273.0" />
+        <HBox alignment="TOP_CENTER" maxWidth="1100.0" spacing="40.0">
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </padding>
+            <children>
+
+                <VBox minWidth="250.0" prefWidth="300.0" spacing="20.0">
+                    <children>
+                        <VBox alignment="TOP_LEFT" spacing="10.0">
+                            <children>
+                                <Circle fx:id="profileIcon" fill="DODGERBLUE" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+                                <Label fx:id="userNameLabel" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="USERNAME" />
+                                <Label fx:id="biographyLabel" text="BIOGRAPHY" wrapText="true" />
+                            </children>
+                        </VBox>
+
+                        <Separator />
+
+                        <VBox spacing="10.0">
+                            <children>
+                                <Label style="-fx-font-weight: bold;" text="Rating Distribution" />
+                                <BarChart fx:id="userGraphChart" legendVisible="false" prefHeight="250.0">
+                                    <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                    <yAxis><NumberAxis side="LEFT" /></yAxis>
+                                </BarChart>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <VBox spacing="30.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <VBox spacing="10.0">
+                            <children>
+                                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Favorite Media" />
+                                <GridPane fx:id="favMediaGridPane" gridLinesVisible="true" prefHeight="150.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                </GridPane>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                            <children>
+                                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Overview List" />
+                                <ListView fx:id="overViewListView" VBox.vgrow="ALWAYS" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+            </children>
+        </HBox>
     </children>
-</AnchorPane>
+</StackPane>

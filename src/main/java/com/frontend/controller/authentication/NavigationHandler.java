@@ -1,4 +1,4 @@
-package com.frontend;
+package com.frontend.controller.authentication;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

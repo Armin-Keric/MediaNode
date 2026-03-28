@@ -1,4 +1,4 @@
-package com.frontend;
+package com.frontend.controller.authentication;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
