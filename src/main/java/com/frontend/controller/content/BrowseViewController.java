@@ -11,8 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,23 +23,19 @@ public class BrowseViewController extends MainController implements Initializabl
     public HBox friendAreaVBox;
     public GridPane browseAreaVBox;
     private Media m;
-    private List<String> typeOfMedias = new ArrayList<>();
-    private String[] mediatypes;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int OBJECTS_PER_ROW = 5;
         int OBJECTS_PER_COL = 5;
-        mediatypes = new String[]{"Anime", "Game", "Music", "Movie", "TVshow"};
-        typeOfMedias.addAll(List.of(mediatypes));
-        // add combobox options (year is tmp)
-        // .getClass().getResources(""); doesn't work?
+        // tmp
+        String[] mediaTypes = new String[]{"Anime", "Game", "Music", "Movie", "TVshow"};
+
         try {
             mediaGenreComboBox.getItems().addAll(Genres.getGenres());
             mediaYearComboBox.getItems().addAll("ASC", "DESC");
-            mediaTypeComboBox.getItems().addAll(typeOfMedias);
-        } catch (SQLException e) {
+            mediaTypeComboBox.getItems().addAll(List.of(mediaTypes));
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -49,8 +43,11 @@ public class BrowseViewController extends MainController implements Initializabl
             featuredAreaVBox.getChildren().add(new AnchorPane());
             friendAreaVBox.getChildren().add(new AnchorPane());
 
-            loadView((AnchorPane) featuredAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
+            MediaViewController tmpFeatured = (MediaViewController) loadView((AnchorPane) featuredAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
+            MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
+
+            tmpFeatured.setMedia("https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg", "Kiwi", "10/10");
+            tmpFriends.setMedia("https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg", "Kas", "10/10");
         }
     }
 
