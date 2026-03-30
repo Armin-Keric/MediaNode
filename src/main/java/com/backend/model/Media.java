@@ -119,14 +119,12 @@ public class Media {
         Connection c = database.getConnection();
         Statement stmt = c.createStatement();
 
-        // Der Basis-String mit der Filter-Logik
         String sql = " SELECT DISTINCT m.* FROM media m " +
                 " LEFT JOIN media_genres mg ON m.id = mg.id " +
                 " LEFT JOIN genres g ON mg.genre_id = g.genre_id " +
                 " WHERE ('" + typeOfMedia + "' = 'ALL' OR m.type = '" + typeOfMedia + "') " +
                 " AND ('" + genre + "' = 'ALL' OR g.type = '" + genre + "') ";
 
-        // Die Sortierung wird als harter String angehängt - Postgres liebt das
         if ("DESC".equalsIgnoreCase(year)) {
             sql += " ORDER BY m.release_date DESC";
         } else {
