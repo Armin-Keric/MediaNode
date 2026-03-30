@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -19,7 +18,7 @@ public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
 
-    private final ToggleGroup menuBarToggleGroup = new ToggleGroup();
+    protected final ToggleGroup menuBarToggleGroup = new ToggleGroup();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,9 +52,20 @@ public class MainController implements Initializable {
     /**
      * loads a fxml file in `contentPane`
      *
-     * @param view fxml file in resources/com/frontend/'CONTENT_VIEW_FOLDER'
+     * @param view fxml file in /com/frontend/view/content/
      */
     protected void loadContentView(String view) {
+        loadView(contentPane, view, "MainController");
+    }
+
+    /**
+     *
+     * @param targetPane pane where the fxml file should be loaded
+     * @param view fxml file in /com/frontend/view/content/
+     * @param src name of the controller for debugging
+     * @return the controller or null
+     */
+    protected Object loadView(AnchorPane targetPane, String view, String src) {
         try {
             FXMLLoader contentLoader = new FXMLLoader(getClass().getResource(getContentViewFolder() + view));
             Node tmp = contentLoader.load();
@@ -66,10 +76,14 @@ public class MainController implements Initializable {
             AnchorPane.setBottomAnchor(tmp, 0.0);
 
             // should prevent flickering over .clear();, .add();
-            contentPane.getChildren().setAll(Collections.singleton(tmp));
+            targetPane.getChildren().setAll(Collections.singleton(tmp));
+            // return controller if still needed
+            return contentLoader.getController();
         } catch (IOException e) {
-            System.out.println("[MainController] Could not find target fxml");
+            System.out.printf("[%s] Could not find target fxml", src);
         }
+
+        return null;
     }
 
     private String getContentViewFolder() {
