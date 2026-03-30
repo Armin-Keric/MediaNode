@@ -1,0 +1,25 @@
+#paginationContainer {
+    -fx-padding: 10px;
+}
+
+.pagination-dot {
+    -fx-cursor: hand;
+}
+
+.pagination-dot .radio {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+}
+
+.pagination-dot:selected .radio {
+    -fx-background-color: white;
+}
+
+.pagination-dot .label {
+    -fx-padding: 0;
+}
+
+.pagination-dot .dot {
+    -fx-background-color: transparent;
+}
