@@ -22,7 +22,7 @@ public class MediaListViewController implements Initializable {
             database = Database.getInstance();
             Connection c = database.getConnection();
             Statement statement = c.createStatement();
-            overViewListView.getItems().addAll(Media.medias("ASC"));
+            //overViewListView.getItems().addAll(Media.medias("ASC"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.SignupController">
+<AnchorPane prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.authentication.SignupController">
    <children>
       <Text layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" textAlignment="CENTER" wrappingWidth="300.0">
          <font>

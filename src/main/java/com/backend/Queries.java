@@ -12,17 +12,17 @@ public class Queries {
     }
 
     //sort by genre type
-    public String getMediaByType(String type) {
+    public static String getMediaByType(String type) {
         // type wäre dann 'Anime', 'Game', 'Movie' etc.
         return "SELECT * FROM media WHERE type = '" + type + "' ORDER BY title ASC";
     }
 
     //oldest to newest...
-    public String getMediaByDate(String order) {
+    public static String getMediaByDate(String order) {
         return "SELECT * FROM media ORDER BY release_date" + order;
     }
 
-    public String getMediaByGenre(String genre) {
+    public static String getMediaByGenre(String genre) {
         return "SELECT m.* FROM media m " +
                 "JOIN media_genres mg ON m.id = mg.media_id " +
                 "JOIN genres g ON mg.genre_id = g.genre_id " +
