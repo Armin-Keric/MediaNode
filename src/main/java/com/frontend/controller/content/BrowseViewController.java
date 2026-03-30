@@ -32,7 +32,7 @@ public class BrowseViewController extends MainController implements Initializabl
         int OBJECTS_PER_ROW = 5;
         int OBJECTS_PER_COL = 5;
         // tmp
-        String[] mediaTypes = new String[]{"ALL", "Anime", "Game", "Music", "Movie", "TVshow"};
+        String[] mediaTypes = new String[]{"Anime", "Game", "Music", "Movie", "TVshow"};
 
         try {
             Genres fakeGenre = new Genres(null, "ALL");
@@ -56,6 +56,8 @@ public class BrowseViewController extends MainController implements Initializabl
             MediaViewController tmpFeatured = (MediaViewController) loadView((AnchorPane) featuredAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
 
+            tmpFeatured.setMedia("https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg", "Kiwi");
+            tmpFriends.setMedia("https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg", "Kas");
             try {
 
                 tmpFeatured.setMedia(Media.medias_type("Game").get(i).getImg_url(), Media.medias_type("Game").get(i).getTitle(), "10/10");
