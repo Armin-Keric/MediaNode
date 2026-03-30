@@ -4,6 +4,7 @@ package com.backend;
 import java.sql.*;
 
 
+
 public class Database {
     private static Database instance;
     Connection connection;
