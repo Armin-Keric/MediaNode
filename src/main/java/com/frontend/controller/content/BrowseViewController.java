@@ -11,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class BrowseViewController extends MainController implements Initializable {
@@ -32,9 +31,9 @@ public class BrowseViewController extends MainController implements Initializabl
         String[] mediaTypes = new String[]{"Anime", "Game", "Music", "Movie", "TVshow"};
 
         try {
-            mediaGenreComboBox.getItems().addAll(Genres.getGenres());
+            //mediaGenreComboBox.getItems().addAll(Genres.getGenres());
             mediaYearComboBox.getItems().addAll("ASC", "DESC");
-            mediaTypeComboBox.getItems().addAll(List.of(mediaTypes));
+            //mediaTypeComboBox.getItems().addAll(List.of(mediaTypes));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -46,8 +45,8 @@ public class BrowseViewController extends MainController implements Initializabl
             MediaViewController tmpFeatured = (MediaViewController) loadView((AnchorPane) featuredAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
 
-            tmpFeatured.setMedia("https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg", "Kiwi", "10/10");
-            tmpFriends.setMedia("https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg", "Kas", "10/10");
+            tmpFeatured.setMedia("https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg", "Kiwi");
+            tmpFriends.setMedia("https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg", "Kas");
         }
     }
 

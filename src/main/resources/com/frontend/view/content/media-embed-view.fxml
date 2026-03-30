@@ -12,7 +12,6 @@
       <HBox alignment="TOP_CENTER" layoutX="14.0" layoutY="286.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label fx:id="titleLabel" text="Title Unset" HBox.hgrow="ALWAYS" />
-            <Label fx:id="ratingLabel" text="Title Unset" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <ComboBox fx:id="addToListComboBox" layoutX="446.0" layoutY="15.0" onAction="#onAddToListComboBoxClicked" promptText="+" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />

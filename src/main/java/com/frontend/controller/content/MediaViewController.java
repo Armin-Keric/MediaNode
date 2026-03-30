@@ -26,11 +26,9 @@ public class MediaViewController {
      *
      * @param imageUrl String
      * @param title String
-     * @param rating String (n/n)
      */
-    public void setMedia(String imageUrl, String title, String rating) {
+    public void setMedia(String imageUrl, String title) {
         titleLabel.setText(title);
-        ratingLabel.setText(rating);
 
         // set image
         try {
