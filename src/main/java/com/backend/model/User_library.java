@@ -11,24 +11,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record User_library(Integer user_id, Integer id) {
+    public static List<Media> consuming = new ArrayList<>();
+    public static List<Media> completed = new ArrayList<>();
+    public static List<Media> planning = new ArrayList<>();
 
-    public static List<Media> plannedByUser = new ArrayList<>();
-    public static List<Media> consumedByUser = new ArrayList<>();
-    public static List<Media> completedByUser = new ArrayList<>();
 
-    public static List<Media> getLibrary() throws SQLException {
+    public static void getUserList() throws SQLException {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
         Statement stmt = c.createStatement();
-        //return "SELECT * FROM media WHERE type = '" + type + "' ORDER BY title ASC";
 
-        //The user_id 1 is for testing you have to change this afterwards
-        ResultSet res = stmt.executeQuery(" SELECT m.* FROM media m JOIN USER_library ul USING (m.id) WHERE ul.status IN ('PLANNING', 'CONSUMING', 'COMPLETED') AND ul.user_id ='" + 1 + "' ");
+        consuming.clear();
+        planning.clear();
+        completed.clear();
 
-        plannedByUser.clear();
-        consumedByUser.clear();
-        completedByUser.clear();
+        String sql = " SELECT DISTINCT m.*, ul.status FROM media m JOIN user_library ul USING(id) WHERE ul.status IN ('PLANNING','CONSUMING','COMPLETED') AND ul.user_id = 1 ORDER BY m.title  ASC ";
+        ResultSet res = stmt.executeQuery(sql);
 
         while (res.next()) {
             Media m = new Media(
@@ -40,23 +39,17 @@ public record User_library(Integer user_id, Integer id) {
                     res.getString("img_url")
             );
             String status = res.getString("status");
-
             switch (status) {
                 case "CONSUMING":
-                    consumedByUser.add(m);
+                    consuming.add(m);
                     break;
-
                 case "PLANNING":
-                    plannedByUser.add(m);
+                    planning.add(m);
                     break;
-
                 case "COMPLETED":
-                    completedByUser.add(m);
+                    completed.add(m);
                     break;
             }
-            results.add(m);
         }
-
-        return results;
     }
 }
