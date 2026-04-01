@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.frontend.controller.authentication.AuthenticationViewController" alignment="CENTER" spacing="10">
+    <Label text="Login"/>
+    <TextField fx:id="usernameField" promptText="Username"/>
+    <PasswordField fx:id="passwordField" promptText="Password"/>
+    <TextField fx:id="visiblePasswordField" promptText="Password" managed="false" visible="false"/>
+    <Label fx:id="warningLabel"/>
+    <Button text="Login" onAction="#onLoginClicked"/>
+</VBox>
