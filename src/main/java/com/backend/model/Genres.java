@@ -2,10 +2,7 @@ package com.backend.model;
 
 import com.backend.Database;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,8 +14,9 @@ public record Genres(Integer genre_id, String type) {
         Database database = Database.getInstance();
         List<Genres> results = new ArrayList<>();
         Connection c = database.getConnection();
-        Statement stmt = c.createStatement();
-        ResultSet res = stmt.executeQuery(" SELECT * FROM genres ");
+        String sql = "SELECT * FROM genres";
+        PreparedStatement stmt = c.prepareStatement(sql);
+        ResultSet res = stmt.executeQuery();
 
         while (res.next()) {
             Genres g = new Genres(
