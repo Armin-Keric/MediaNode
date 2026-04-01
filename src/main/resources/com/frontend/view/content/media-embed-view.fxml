@@ -10,7 +10,7 @@
       <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="imageImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="titleLabel" text="Title Unset" />
+            <Label fx:id="titleLabel" maxWidth="200.0" text="Title Unset" textAlignment="CENTER" />
          </children>
       </VBox>
    </children>
