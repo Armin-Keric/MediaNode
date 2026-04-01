@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.ToggleButton?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.authentication.AuthenticationViewController">
+<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.AuthenticationViewController">
    <children>
-      <ToggleButton id="login-view.fxml" layoutX="20.0" layoutY="20.0" onAction="#onMenuBarButtonClicked" text="Login" />
-      <ToggleButton id="signup-view.fxml" layoutX="20.0" layoutY="60.0" onAction="#onMenuBarButtonClicked" text="Signup" />
-
-      <AnchorPane fx:id="contentPane" layoutX="120.0" layoutY="20.0" prefHeight="360.0" prefWidth="460.0" />
+      <VBox alignment="TOP_CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="30.0" spacing="10.0">
+               <children>
+                  <ToggleButton fx:id="loginToggle" selected="true" text="Login" onAction="#toggleAuthMode" />
+                  <ToggleButton fx:id="signupToggle" text="Signup" onAction="#toggleAuthMode" />
+               </children>
+            </HBox>
+            <StackPane>
+               <children>
+                  <VBox fx:id="loginContainer" alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-size: 20px;" text="Login" />
+                        <TextField fx:id="usernameField" promptText="Username" maxWidth="200.0"/>
+                        <PasswordField fx:id="passwordField" promptText="Password" maxWidth="200.0"/>
+                        <Button text="Sign in" onAction="#onLoginClicked" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="signupContainer" alignment="CENTER" spacing="10.0" visible="false" managed="false">
+                     <children>
+                        <Label style="-fx-font-size: 20px;" text="Register" />
+                        <TextField fx:id="signupUsernameField" promptText="Username" maxWidth="200.0"/>
+                        <PasswordField fx:id="signupPasswordField" promptText="Password" maxWidth="200.0"/>
+                        <PasswordField fx:id="signupPasswordRepeatField" promptText="Repeat Passphrase" maxWidth="200.0"/>
+                        <Button text="Creat Account" onAction="#onSignupClicked" />
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+            <Label fx:id="warningLabel" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

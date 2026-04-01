@@ -3,10 +3,7 @@ package com.backend.model;
 import com.backend.Database;
 import com.backend.Queries;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,12 +19,13 @@ public class Media {
 
 
     /// //// Pre cached lists for application
-    public static List<Media> medias(String order) throws SQLException {
+    public static List<Media> medias() throws SQLException {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
-        Statement stmt = c.createStatement();
-        ResultSet res = stmt.executeQuery("SELECT m.* FROM media m  ORDER BY release_date " + order);
+        String sql = "SELECT m.* FROM media m  ORDER BY release_date ";
+        PreparedStatement stmt = c.prepareStatement(sql);
+        ResultSet res = stmt.executeQuery();
 
         while (res.next()) {
             Media m = new Media(
@@ -95,8 +93,10 @@ public class Media {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
-        Statement stmt = c.createStatement();
-        ResultSet res = stmt.executeQuery(" SELECT * FROM media WHERE type = '" + type + "' ORDER BY title ASC ");
+        String sql = "SELECT * FROM media WHERE type = ? ORDER BY title ASC";
+        PreparedStatement stmt = c.prepareStatement(sql);
+        stmt.setString(1, type);
+        ResultSet res = stmt.executeQuery();
 
         while (res.next()) {
             Media m = new Media(
@@ -117,7 +117,6 @@ public class Media {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
-        Statement stmt = c.createStatement();
 
         String sql = " SELECT DISTINCT m.* FROM media m " +
                 " LEFT JOIN media_genres mg ON m.id = mg.id " +
@@ -130,8 +129,9 @@ public class Media {
         } else {
             sql += " ORDER BY m.release_date ASC";
         }
+        PreparedStatement stmt = c.prepareStatement(sql);
 
-        ResultSet res = stmt.executeQuery(sql);
+        ResultSet res = stmt.executeQuery();
 
         while (res.next()) {
             Media m = new Media(

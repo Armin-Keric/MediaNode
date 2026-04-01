@@ -1,38 +1,36 @@
 package com.frontend.controller.content;
 
-import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
+import com.backend.model.Media;
+import com.frontend.MainController;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLException;
 
 public class MediaViewController {
-    public ComboBox<String> addToListComboBox;
-    public Label ratingLabel;
     public Label titleLabel;
     public ImageView imageImageView;
 
-    public void onAddToListComboBoxClicked(ActionEvent actionEvent) {
-
-    }
+    private Media media;
 
     /**
      * sets the image, title and rating for an already loaded fxml
      * meant for Media-Embed-View.fxml
      *
-     * @param imageUrl String
-     * @param title String
      */
-    public void setMedia(String imageUrl, String title) {
-        titleLabel.setText(title);
+    public void setMedia(Media m) {
+        this.media = m;
 
-        // set image
         try {
-            URL url = new URL(imageUrl);
+            titleLabel.setText(m.getTitle());
+
+            // set image
+            URL url = new URL(m.getImg_url());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             // needed for some servers
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");
@@ -67,5 +65,16 @@ public class MediaViewController {
             System.out.println("[MediaViewController] Loading local image...");
             imageImageView.setImage(new Image(placeholderStream));
         }
+    }
+
+    public void onMediaEmbedClicked(MouseEvent mouseEvent) {
+        MainController main = MainController.getInstance();
+        MediaDetailsViewController controller = (MediaDetailsViewController) main.loadView(
+                main.contentPane,
+                "media-fullscreen-view.fxml",
+                "[MediaViewController loading MediaDetailsViewController]"
+        );
+
+        controller.setMedia(media);
     }
 }

@@ -6,20 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../style/browse-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.BrowseViewController">
    <children>
-      <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" stylesheets="@../../style/browse-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="30.0" styleClass="descriptionHBox">
                <children>
-
                   <Label maxWidth="150.0" minWidth="150.0" text="tmp" />
                   <Label maxWidth="150.0" minWidth="150.0" text="Type" />
                   <Label maxWidth="150.0" minWidth="150.0" text="Genre" />
                   <Label maxWidth="150.0" minWidth="150.0" text="Year" />
-                  
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="30.0" styleClass="localMenuBarHBox">
@@ -30,9 +29,11 @@
                   <ComboBox fx:id="mediaYearComboBox" maxWidth="150.0" minWidth="150.0" onAction="#getSelectedYear" promptText="Any" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
+            <Region prefHeight="20.0" />
             <HBox fx:id="featuredAreaVBox" alignment="TOP_CENTER" />
             <HBox fx:id="friendAreaVBox" alignment="TOP_CENTER" />
             <GridPane fx:id="browseAreaVBox" alignment="TOP_CENTER" />
+            <Region prefHeight="20.0" />
          </children>
       </VBox>
    </children>

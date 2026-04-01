@@ -1,5 +1,7 @@
 package com.frontend;
 
+import com.backend.model.User_library;
+import com.backend.service.AuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,17 +13,20 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
-
+    private static MainController instance;
     protected final ToggleGroup menuBarToggleGroup = new ToggleGroup();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        instance = this;
+
         for (Node node : menuBarHBox.getChildren()) {
             if (!node.getId().equals("groupIgnore") && !node.getId().isEmpty()) {
                 ToggleButton tmp = (ToggleButton) node;
@@ -39,12 +44,23 @@ public class MainController implements Initializable {
      *
      * @param actionEvent clicked Button
      */
-    public void onMenuBarButtonClicked(ActionEvent actionEvent) {
+    public void onMenuBarButtonClicked(ActionEvent actionEvent) throws SQLException {
         ToggleButton src = (ToggleButton) actionEvent.getSource();
         String target = src.getId();
 
-        if (!target.isEmpty()) {
-            System.out.println("Trying to load: " + getClass().getResource(getContentViewFolder() + target));
+        //the only special case... we want the right session (the current user that logged in)
+        if (target.equals("profile-layout-view.fxml")) {
+            if (AuthService.sessionId != 0) {
+                User_library.getUserList(AuthService.sessionId);
+
+                loadContentView(target);
+                return;
+            } else {
+                System.out.println("Falsch!");
+            }
+        }
+
+        if(!target.isEmpty() && !target.equals("profile-layout-view.fxml")){
             loadContentView(target);
         }
     }
@@ -54,18 +70,18 @@ public class MainController implements Initializable {
      *
      * @param view fxml file in /com/frontend/view/content/
      */
-    protected void loadContentView(String view) {
+    public void loadContentView(String view) {
         loadView(contentPane, view, "MainController");
     }
 
     /**
      *
      * @param targetPane pane where the fxml file should be loaded
-     * @param view fxml file in /com/frontend/view/content/
-     * @param src name of the controller for debugging
+     * @param view       fxml file in /com/frontend/view/content/
+     * @param src        name of the controller for debugging
      * @return the controller or null
      */
-    protected Object loadView(AnchorPane targetPane, String view, String src) {
+    public Object loadView(AnchorPane targetPane, String view, String src) {
         try {
             FXMLLoader contentLoader = new FXMLLoader(getClass().getResource(getContentViewFolder() + view));
             Node tmp = contentLoader.load();
@@ -88,5 +104,14 @@ public class MainController implements Initializable {
 
     private String getContentViewFolder() {
         return "/com/frontend/view/content/";
+    }
+
+    /**
+     * if a loaded pan wants tho load something directly on the main-view
+     *
+     * @return this
+     */
+    public static MainController getInstance() {
+        return instance;
     }
 }
