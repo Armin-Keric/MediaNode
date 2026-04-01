@@ -85,7 +85,7 @@ public class MediaListViewController implements Initializable {
 
         return null;
     }
-
+    //-
     //Method of MainController
     private String getContentViewFolder() {
         return "/com/frontend/view/content/";
