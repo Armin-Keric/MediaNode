@@ -26,12 +26,35 @@ public record Users(Integer user_id, String name, String password, String biogra
                     res.getString("password"),
                     res.getString("biography"),
                     res.getString("img_url")
-                    );
+            );
             results.add(u);
         }
 
         return results;
     }
 
+    //@ToDo
 
+    //we need this shit here for authorization
+    //I somehow have to set the current user id from the user that logged in
+    /**
+    public  Users getSession(String query) throws SQLException {
+        Database database = Database.getInstance();
+        Connection c = database.getConnection();
+        Statement stmt = c.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+
+        while (res.next()) {
+            int x = res.getInt("user_id");
+            user_id(x);
+        }
+
+        return
+    }
+
+    @Override
+    public Integer user_id(int x) {
+        return user_id;
+    }
+    **/
 }

@@ -1,5 +1,6 @@
 package com.frontend.controller.authentication;
 
+import com.backend.model.Users;
 import com.frontend.MainController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -49,11 +50,18 @@ public class AuthenticationController extends MainController {
 
                 if (username.equals(fileUsername) && password.equals(filePassword)) {
                     warningLabel.setText("Login succesful");
+
+                    //about here i have to tell give the backend the user_id for the magic to work...
+
+                    //String query = "SELECT u.user_id FROM users u WHERE u.name = '" + fileUsername + "'" ;
+                    //Users.getSession(query);
+
+
                     return;
                 }
             }
 
-            warningLabel.setText("Error: Usernaem or Password false");
+            warningLabel.setText("Error: Username or Password false");
 
         } catch (IOException e) {
             warningLabel.setText("Error: ?");

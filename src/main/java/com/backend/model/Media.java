@@ -20,11 +20,6 @@ public class Media {
     String description;
     String img_url;
 
-    //placeholder
-    private ArrayList<Media> medias;
-    private ArrayList<Media> medias_release;
-    private ArrayList<Media> medias_genres;
-    private ArrayList<Media> medias_type;
 
     /// //// Pre cached lists for application
     public static List<Media> medias(String order) throws SQLException {
@@ -32,7 +27,7 @@ public class Media {
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
         Statement stmt = c.createStatement();
-        ResultSet res = stmt.executeQuery("SELECT * FROM media ORDER BY title " + order);
+        ResultSet res = stmt.executeQuery("SELECT m.* FROM media m  ORDER BY release_date " + order);
 
         while (res.next()) {
             Media m = new Media(
@@ -49,7 +44,7 @@ public class Media {
         return results;
     }
 
-    public List<Media> medias_release(String order) throws SQLException {
+    public static List<Media> medias_release(String order) throws SQLException {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
@@ -71,7 +66,7 @@ public class Media {
         return results;
     }
 
-    public List<Media> medias_genres(String genre) throws SQLException {
+    public static List<Media> medias_genres(String genre) throws SQLException {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
@@ -96,12 +91,47 @@ public class Media {
         return results;
     }
 
-    public List<Media> medias_type(String type) throws SQLException {
+    public static List<Media> medias_type(String type) throws SQLException {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
         Statement stmt = c.createStatement();
         ResultSet res = stmt.executeQuery(" SELECT * FROM media WHERE type = '" + type + "' ORDER BY title ASC ");
+
+        while (res.next()) {
+            Media m = new Media(
+                    res.getInt("id"),
+                    res.getString("title"),
+                    res.getObject("release_date", LocalDate.class),
+                    res.getString("type"),
+                    res.getString("description"),
+                    res.getString("img_url")
+            );
+            results.add(m);
+        }
+
+        return results;
+    }
+
+    public static List<Media> getCurrentData(String typeOfMedia, String genre, String year) throws SQLException {
+        Database database = Database.getInstance();
+        List<Media> results = new ArrayList<>();
+        Connection c = database.getConnection();
+        Statement stmt = c.createStatement();
+
+        String sql = " SELECT DISTINCT m.* FROM media m " +
+                " LEFT JOIN media_genres mg ON m.id = mg.id " +
+                " LEFT JOIN genres g ON mg.genre_id = g.genre_id " +
+                " WHERE ('" + typeOfMedia + "' = 'ALL' OR m.type = '" + typeOfMedia + "') " +
+                " AND ('" + genre + "' = 'ALL' OR g.type = '" + genre + "') ";
+
+        if ("DESC".equalsIgnoreCase(year)) {
+            sql += " ORDER BY m.release_date DESC";
+        } else {
+            sql += " ORDER BY m.release_date ASC";
+        }
+
+        ResultSet res = stmt.executeQuery(sql);
 
         while (res.next()) {
             Media m = new Media(
