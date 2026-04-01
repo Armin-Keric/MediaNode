@@ -1,5 +1,7 @@
 package com.frontend;
 
+import com.backend.model.User_library;
+import com.backend.service.AuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +13,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
@@ -18,7 +21,7 @@ public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
     private static MainController instance;
-
+    public AuthService service;
     protected final ToggleGroup menuBarToggleGroup = new ToggleGroup();
 
     @Override
@@ -42,12 +45,23 @@ public class MainController implements Initializable {
      *
      * @param actionEvent clicked Button
      */
-    public void onMenuBarButtonClicked(ActionEvent actionEvent) {
+    public void onMenuBarButtonClicked(ActionEvent actionEvent) throws SQLException {
         ToggleButton src = (ToggleButton) actionEvent.getSource();
         String target = src.getId();
 
-        if (!target.isEmpty()) {
-            System.out.println("Trying to load: " + getClass().getResource(getContentViewFolder() + target));
+        //the only special case... we want the right session (the current user that logged in)
+        if (target.equals("profile-layout-view.fxml")) {
+            if (AuthService.sessionId != 0) {
+                User_library.getUserList(AuthService.sessionId);
+
+                loadContentView(target);
+                return;
+            } else {
+                System.out.println("Falsch!");
+            }
+        }
+
+        if(!target.isEmpty() && !target.equals("profile-layout-view.fxml")){
             loadContentView(target);
         }
     }
@@ -64,8 +78,8 @@ public class MainController implements Initializable {
     /**
      *
      * @param targetPane pane where the fxml file should be loaded
-     * @param view fxml file in /com/frontend/view/content/
-     * @param src name of the controller for debugging
+     * @param view       fxml file in /com/frontend/view/content/
+     * @param src        name of the controller for debugging
      * @return the controller or null
      */
     public Object loadView(AnchorPane targetPane, String view, String src) {
