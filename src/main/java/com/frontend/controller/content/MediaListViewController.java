@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MediaListViewController extends MainController implements Initializable {
+public class MediaListViewController implements Initializable {
     public ListView<Media> overViewListView;
     public HBox consumingArea;
     public HBox completedArea;
@@ -85,7 +85,7 @@ public class MediaListViewController extends MainController implements Initializ
 
         return null;
     }
-
+    //-
     //Method of MainController
     private String getContentViewFolder() {
         return "/com/frontend/view/content/";
