@@ -16,22 +16,21 @@ public class MediaViewController {
     public Label titleLabel;
     public ImageView imageImageView;
 
-    private int id;
+    private Media media;
 
     /**
      * sets the image, title and rating for an already loaded fxml
      * meant for Media-Embed-View.fxml
      *
-     * @param id the id of the object in the db
      */
-    public void setMedia(int id) {
-        this.id = id;
+    public void setMedia(Media m) {
+        this.media = m;
 
         try {
-            titleLabel.setText(Media.medias("ASC").get(id).getTitle());
+            titleLabel.setText(m.getTitle());
 
             // set image
-            URL url = new URL(Media.medias("ASC").get(id).getImg_url());
+            URL url = new URL(m.getImg_url());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             // needed for some servers
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");
@@ -49,8 +48,6 @@ public class MediaViewController {
                 System.out.println("[MediaViewController] Response Code: " + serverResponse);
                 loadLocalImage("Placeholder-Media-Embed.jpg");
             }
-        } catch (SQLException e) {
-            System.out.println("des kas query geht ned");
         } catch (Exception e) {
             loadLocalImage("Placeholder-Media-Embed.jpg");
         }
@@ -78,6 +75,6 @@ public class MediaViewController {
                 "[MediaViewController loading MediaDetailsViewController]"
         );
 
-        controller.setMedia(id);
+        controller.setMedia(media);
     }
 }

@@ -56,10 +56,10 @@ public class BrowseViewController extends MainController implements Initializabl
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
 
             try {
-                tmpFeatured.setMedia(Media.medias_type("Game").get(i).getId());
+                tmpFeatured.setMedia(Media.medias_type("Game").get(i));
 
                 //the media shown should always be sorted by date at the start...
-                tmpFriends.setMedia(Media.medias("ASC").get(i).getId());
+                tmpFriends.setMedia(Media.medias().get(i));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -82,7 +82,7 @@ public class BrowseViewController extends MainController implements Initializabl
             friendAreaVBox.getChildren().add(new AnchorPane());
 
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            tmpFriends.setMedia(currentData.get(i).getId());
+            tmpFriends.setMedia(currentData.get(i));
 
             //tmpFriends.setMedia(,,);
         }

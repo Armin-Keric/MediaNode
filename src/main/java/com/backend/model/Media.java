@@ -22,12 +22,12 @@ public class Media {
 
 
     /// //// Pre cached lists for application
-    public static List<Media> medias(String order) throws SQLException {
+    public static List<Media> medias() throws SQLException {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();
         Connection c = database.getConnection();
         Statement stmt = c.createStatement();
-        ResultSet res = stmt.executeQuery("SELECT m.* FROM media m  ORDER BY release_date " + order);
+        ResultSet res = stmt.executeQuery("SELECT m.* FROM media m  ORDER BY release_date ");
 
         while (res.next()) {
             Media m = new Media(

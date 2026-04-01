@@ -47,19 +47,19 @@ public class MediaListViewController implements Initializable {
             consumingArea.getChildren().add(new AnchorPane());
 
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) consumingArea.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            tmpFriends.setMedia(User_library.consuming.get(i).getImg_url(), User_library.consuming.get(i).getTitle());
+            tmpFriends.setMedia(User_library.consuming.get(i));
         }
 
         for (int i = 0; i < User_library.completed.size(); ++i) {
             completedArea.getChildren().add(new AnchorPane());
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) completedArea.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            tmpFriends.setMedia(User_library.completed.get(i).getImg_url(), User_library.completed.get(i).getTitle());
+            tmpFriends.setMedia(User_library.completed.get(i));
         }
 
         for (int i = 0; i < User_library.planning.size(); ++i) {
             planningArea.getChildren().add(new AnchorPane());
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) planningArea.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            tmpFriends.setMedia(User_library.planning.get(i).getImg_url(), User_library.planning.get(i).getTitle());
+            tmpFriends.setMedia(User_library.planning.get(i));
         }
 
     }

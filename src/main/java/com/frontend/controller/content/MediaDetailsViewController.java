@@ -15,21 +15,14 @@ public class MediaDetailsViewController extends MediaViewController {
     public Label titleLabel;
     public ListView<String> detailsListView;
 
-    public void setMedia(int mediaId) {
-        super.setMedia(mediaId);
+    public void setMedia(Media m) {
+        super.setMedia(m);
 
 
-
-        try {
-            Media tmp = Media.medias("ASC").get(mediaId);
-
-            descriptionTextArea.setText(tmp.getDescription());
-            detailsListView.getItems().addAll(
-                    tmp.getRelease_date().toString(),
-                    tmp.getType()
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        descriptionTextArea.setText(m.getDescription());
+        detailsListView.getItems().addAll(
+                m.getRelease_date().toString(),
+                m.getType()
+        );
     }
 }

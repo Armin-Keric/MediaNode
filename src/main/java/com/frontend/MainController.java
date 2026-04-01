@@ -21,7 +21,6 @@ public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
     private static MainController instance;
-    public AuthService service;
     protected final ToggleGroup menuBarToggleGroup = new ToggleGroup();
 
     @Override
