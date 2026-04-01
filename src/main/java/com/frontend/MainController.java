@@ -75,6 +75,7 @@ public class MainController implements Initializable {
     }
 
     /**
+     * loads a fxml file to a pane
      *
      * @param targetPane pane where the fxml file should be loaded
      * @param view       fxml file in /com/frontend/view/content/
@@ -107,7 +108,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * if a loaded pan wants tho load something directly on the main-view
+     * if a loaded pane wants tho load something directly on the main-view
      *
      * @return this
      */
