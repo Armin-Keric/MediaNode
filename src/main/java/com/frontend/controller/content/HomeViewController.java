@@ -20,18 +20,17 @@ public class HomeViewController extends MainController implements Initializable 
     public ImageView mainCarouselImageView;
     public HBox paginationContainer;
 
-    private final List<String> imagePaths = new ArrayList<>();
+    private final List<String> imageURLs = new ArrayList<>();
     private final ToggleGroup dotGroup = new ToggleGroup();
     private int currentIndex = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Test-Path
-        imagePaths.add("/com/frontend/view/media/test1.jpg");
-        imagePaths.add("/com/frontend/view/media/test2.jpg");
-        imagePaths.add("/com/frontend/view/media/test3.jpg");
-        imagePaths.add("/com/frontend/view/media/test4.jpg");
-        imagePaths.add("/com/frontend/view/media/test5.jpg");
+        // Test-URL
+        imageURLs.add("https://p3-ofp.static.pub//fes/cms/2024/09/12/0htn589or1vvi4zfkiwlxw8zorx5tm707792.png");
+        imageURLs.add("https://w0.peakpx.com/wallpaper/178/348/HD-wallpaper-game-of-thrones02-cool-tv-series-entertainment-fun-game-of-thrones-thumbnail.jpg");
+        imageURLs.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqrd0xUAAXtm-P_-79m65AW_SvTPa7ctXPAw&s");
+        imageURLs.add("https://images.mubicdn.net/images/film/395525/cache-922134-1745502042/image-w1280.jpg?size=800x");
 
         setupPagination();
         updateUI(false);
@@ -39,7 +38,7 @@ public class HomeViewController extends MainController implements Initializable 
 
     private void setupPagination() {
         paginationContainer.getChildren().clear();
-        for (int i = 0; i < imagePaths.size(); i++) {
+        for (int i = 0; i < imageURLs.size(); i++) {
             RadioButton dot = new RadioButton();
             dot.setToggleGroup(dotGroup);
             dot.getStyleClass().add("pagination-dot"); // CSS Class
@@ -56,19 +55,19 @@ public class HomeViewController extends MainController implements Initializable 
     }
 
     public void onNextClicked() {
-        if (imagePaths.isEmpty()) return;
-        currentIndex = (currentIndex + 1) % imagePaths.size();
+        if (imageURLs.isEmpty()) return;
+        currentIndex = (currentIndex + 1) % imageURLs.size();
         updateUI(true);
     }
 
     public void onPreviousClicked() {
-        if (imagePaths.isEmpty()) return;
-        currentIndex = (currentIndex - 1 + imagePaths.size()) % imagePaths.size();
+        if (imageURLs.isEmpty()) return;
+        currentIndex = (currentIndex - 1 + imageURLs.size()) % imageURLs.size();
         updateUI(true);
     }
 
     private void updateUI(boolean useFade) {
-        if (imagePaths.isEmpty()) return;
+        if (imageURLs.isEmpty()) return;
 
         if (useFade) {
             // 1. Fade Out
@@ -96,10 +95,10 @@ public class HomeViewController extends MainController implements Initializable 
 
     private void loadImage() {
         try {
-            Image img = new Image(getClass().getResourceAsStream(imagePaths.get(currentIndex)));
+            Image img = new Image(imageURLs.get(currentIndex), true);
             mainCarouselImageView.setImage(img);
         } catch (Exception e) {
-            System.out.println("Fehler: " + imagePaths.get(currentIndex));
+            System.out.println("Fehler: " + imageURLs.get(currentIndex));
         }
     }
 }
