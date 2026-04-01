@@ -2,7 +2,6 @@ package com.frontend.controller.content;
 
 import com.backend.model.Genres;
 import com.backend.model.Media;
-import com.backend.model.User_library;
 import com.frontend.MainController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -13,7 +12,6 @@ import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -58,10 +56,10 @@ public class BrowseViewController extends MainController implements Initializabl
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
 
             try {
-                tmpFeatured.setMedia(Media.medias_type("Game").get(i).getImg_url(), Media.medias_type("Game").get(i).getTitle());
+                tmpFeatured.setMedia(Media.medias_type("Game").get(i).getId());
 
                 //the media shown should always be sorted by date at the start...
-                tmpFriends.setMedia(Media.medias("ASC").get(i).getImg_url(), Media.medias("ASC").get(i).getTitle());
+                tmpFriends.setMedia(Media.medias("ASC").get(i).getId());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -84,7 +82,7 @@ public class BrowseViewController extends MainController implements Initializabl
             friendAreaVBox.getChildren().add(new AnchorPane());
 
             MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            tmpFriends.setMedia(currentData.get(i).getImg_url(), currentData.get(i).getTitle());
+            tmpFriends.setMedia(currentData.get(i).getId());
 
             //tmpFriends.setMedia(,,);
         }
