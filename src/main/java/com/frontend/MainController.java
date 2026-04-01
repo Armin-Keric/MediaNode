@@ -17,11 +17,14 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     public HBox menuBarHBox;
     public AnchorPane contentPane;
+    private static MainController instance;
 
     protected final ToggleGroup menuBarToggleGroup = new ToggleGroup();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        instance = this;
+
         for (Node node : menuBarHBox.getChildren()) {
             if (!node.getId().equals("groupIgnore") && !node.getId().isEmpty()) {
                 ToggleButton tmp = (ToggleButton) node;
@@ -54,7 +57,7 @@ public class MainController implements Initializable {
      *
      * @param view fxml file in /com/frontend/view/content/
      */
-    protected void loadContentView(String view) {
+    public void loadContentView(String view) {
         loadView(contentPane, view, "MainController");
     }
 
@@ -65,7 +68,7 @@ public class MainController implements Initializable {
      * @param src name of the controller for debugging
      * @return the controller or null
      */
-    protected Object loadView(AnchorPane targetPane, String view, String src) {
+    public Object loadView(AnchorPane targetPane, String view, String src) {
         try {
             FXMLLoader contentLoader = new FXMLLoader(getClass().getResource(getContentViewFolder() + view));
             Node tmp = contentLoader.load();
@@ -88,5 +91,14 @@ public class MainController implements Initializable {
 
     private String getContentViewFolder() {
         return "/com/frontend/view/content/";
+    }
+
+    /**
+     * if a loaded pan wants tho load something directly on the main-view
+     *
+     * @return this
+     */
+    public static MainController getInstance() {
+        return instance;
     }
 }
