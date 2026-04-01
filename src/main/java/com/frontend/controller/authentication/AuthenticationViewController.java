@@ -1,17 +1,13 @@
 package com.frontend.controller.authentication;
 
+import com.backend.service.AuthService;
 import com.frontend.MainController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.net.URL;
 
@@ -27,6 +23,7 @@ public class AuthenticationViewController extends MainController {
     public TextField visiblePasswordField;
 
     private static final String FILE_PATH = "tempUserdata.csv";
+    public AuthService authService = new AuthService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,18 +54,12 @@ public class AuthenticationViewController extends MainController {
             return;
         }
         try {
-            List<String> lines = Files.readAllLines(Path.of(FILE_PATH));
-            for (String line : lines) {
-                String[] parts = line.split(",");
-                if (parts.length != 2) continue;
-                if (username.equals(parts[0]) && password.equals(parts[1])) {
-                    warningLabel.setText("Login successful");
-                    return;
-                }
-            }
-            warningLabel.setText("Error: Username or Password false");
-        } catch (IOException e) {
-            warningLabel.setText("Error: ?");
+            //@ToDo
+            //Abgleichen mit dem Wert aus der DB. wichtig werden user_id sein usw....
+            authService.checkLogin(username,password);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -87,26 +78,15 @@ public class AuthenticationViewController extends MainController {
             warningLabel.setText("Error: Password dont match");
             return;
         }
+
         try {
-            File file = new File(FILE_PATH);
-            if (file.exists()) {
-                List<String> lines = Files.readAllLines(file.toPath());
-                for (String line : lines) {
-                    String[] parts = line.split(",");
-                    if (parts.length < 1) continue;
-                    if (username.equals(parts[0])) {
-                        warningLabel.setText("Error: Username already taken");
-                        return;
-                    }
-                }
-            }
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            writer.write(username + "," + password);
-            writer.newLine();
-            writer.close();
-            warningLabel.setText("Signup successful");
-        } catch (IOException e) {
-            warningLabel.setText("Error: Cannot save user");
+            //@ToDo
+            //Hier senden wir ans backend die Sachen (username, password) die er ins
+            //table anfügen soll, sofern der name noch nicht existiert.
+            authService.saveUser(username, password);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
