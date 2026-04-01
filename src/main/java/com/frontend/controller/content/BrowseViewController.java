@@ -35,6 +35,7 @@ public class BrowseViewController extends MainController implements Initializabl
         String[] mediaTypes = new String[]{"ALL","Anime", "Game", "Music", "Movie", "TVshow"};
 
         try {
+            //there's no "ALL" Genre so we're doing it like this...
             Genres fakeGenre = new Genres(null, "ALL");
             mediaGenreComboBox.getItems().add(fakeGenre);
             mediaGenreComboBox.getItems().addAll(Genres.getGenres());
