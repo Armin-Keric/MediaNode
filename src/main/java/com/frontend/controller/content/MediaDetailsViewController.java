@@ -1,6 +1,7 @@
 package com.frontend.controller.content;
 
 import com.backend.model.*;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -10,9 +11,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.HBox;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class MediaDetailsViewController extends MediaViewController {
+public class MediaDetailsViewController extends MediaViewController implements Initializable {
     public ImageView bannerImageView;
     public ImageView imageImageView;
     public TextArea descriptionTextArea;
@@ -22,6 +25,16 @@ public class MediaDetailsViewController extends MediaViewController {
     public Slider ratingSlider;
     public HBox recommendedHBox;
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        statusComboBox.getItems().addAll(
+                "PLANING",
+                "CONSUMING",
+                "COMPLETED"
+        );
+        statusComboBox.getSelectionModel().selectFirst();
+    }
 
     public void setMedia(Media m) throws SQLException {
         try {
