@@ -48,18 +48,6 @@ public class MainController implements Initializable {
         ToggleButton src = (ToggleButton) actionEvent.getSource();
         String target = src.getId();
 
-        //the only special case... we want the right session (the current user that logged in)
-        if (target.equals("profile-layout-view.fxml")) {
-            if (AuthService.sessionId != 0) {
-                User_library.getUserList(AuthService.sessionId);
-
-                loadContentView(target);
-                return;
-            } else {
-                System.out.println("Falsch!");
-            }
-        }
-
         if(!target.isEmpty() && !target.equals("profile-layout-view.fxml")){
             loadContentView(target);
         }
