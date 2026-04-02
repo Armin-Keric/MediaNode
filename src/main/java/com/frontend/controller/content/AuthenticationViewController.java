@@ -44,6 +44,7 @@ public class AuthenticationViewController extends MainController implements Init
         signupContainer.setVisible(!isLogin);
         signupContainer.setManaged(!isLogin);
 
+        // clear warningLabel
         warningLabel.setText("");
     }
 
@@ -52,12 +53,19 @@ public class AuthenticationViewController extends MainController implements Init
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            warningLabel.setText("Error: Please fill all fields");
+            warningLabel.setText("Please fill all fields");
             return;
         }
 
         try {
-            authService.checkLogin(username, password);
+            // load ProfileLayoutView if everything is ok
+            if (authService.checkLogin(username, password)) {
+                MainController tmp = MainController.getInstance();
+                tmp.loadView(tmp.contentPane, "profile-layout-view.fxml", "AuthenticationController loading ProfileLayout");
+                return;
+            }
+
+            warningLabel.setText("Please try again");
         } catch (Exception e) {
             warningLabel.setText("Login failed: " + e.getMessage());
         }
@@ -69,12 +77,12 @@ public class AuthenticationViewController extends MainController implements Init
         String repeat = signupPasswordRepeatField.getText();
 
         if (username.isEmpty() || password.isEmpty() || repeat.isEmpty()) {
-            warningLabel.setText("Error: Please fill all fields");
+            warningLabel.setText("Please fill all fields");
             return;
         }
 
         if (!password.equals(repeat)) {
-            warningLabel.setText("Error: Passwords don't match");
+            warningLabel.setText("Passwords don't match");
             return;
         }
 

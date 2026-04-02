@@ -4,7 +4,11 @@ import com.backend.model.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import com.backend.model.Media;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.layout.HBox;
 
 import java.sql.SQLException;
 
@@ -14,6 +18,9 @@ public class MediaDetailsViewController extends MediaViewController {
     public TextArea descriptionTextArea;
     public Label titleLabel;
     public ListView<String> detailsListView;
+    public ComboBox<String> statusComboBox;
+    public Slider ratingSlider;
+    public HBox recommendedHBox;
 
 
     public void setMedia(Media m) throws SQLException {
@@ -80,5 +87,9 @@ public class MediaDetailsViewController extends MediaViewController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void onRatingSliderDragOver(DragEvent dragEvent) {
+
     }
 }

@@ -48,19 +48,7 @@ public class MainController implements Initializable {
         ToggleButton src = (ToggleButton) actionEvent.getSource();
         String target = src.getId();
 
-        //the only special case... we want the right session (the current user that logged in)
-        if (target.equals("profile-layout-view.fxml")) {
-            if (AuthService.sessionId != 0) {
-                User_library.getUserList(AuthService.sessionId);
-
-                loadContentView(target);
-                return;
-            } else {
-                System.out.println("Falsch!");
-            }
-        }
-
-        if(!target.isEmpty() && !target.equals("profile-layout-view.fxml")){
+        if(!target.isEmpty()){
             loadContentView(target);
         }
     }
@@ -75,6 +63,7 @@ public class MainController implements Initializable {
     }
 
     /**
+     * loads a fxml file to a pane
      *
      * @param targetPane pane where the fxml file should be loaded
      * @param view       fxml file in /com/frontend/view/content/
@@ -107,7 +96,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * if a loaded pan wants tho load something directly on the main-view
+     * if a loaded pane wants tho load something directly on the main-view
      *
      * @return this
      */

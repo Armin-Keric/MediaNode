@@ -25,7 +25,6 @@ public class MediaListViewController implements Initializable {
     public HBox planningArea;
     private Database database;
     private Media media;
-    private AuthService service = new AuthService();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

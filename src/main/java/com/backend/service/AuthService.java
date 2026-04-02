@@ -1,16 +1,15 @@
 package com.backend.service;
 
 import com.backend.Database;
-import com.frontend.MainController;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-//@ToDo move to backend
 public class AuthService {
     public boolean isTaken = false;
     public static int sessionId = 0;
-    public MainController mc;
-
 
     public int getSessionId() {
         return sessionId;
@@ -18,10 +17,6 @@ public class AuthService {
 
     public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
-    }
-
-    public boolean getIsTaken() {
-        return isTaken;
     }
 
     public void setTaken(boolean taken) {
@@ -44,22 +39,16 @@ public class AuthService {
             System.out.println("Login successfull...");
             setSessionId(rs.getInt("user_id"));
             System.out.println("Current session: " + getSessionId());
+
             return true;
-
-
         }
 
         System.out.println("Password doesn't match or user doesn't exist!");
+
         return false;
     }
 
-    public boolean isUsernameTaken() {
-        // @ToDo
-        return false;
-    }
-
-    public void saveUser(String username, String password) throws SQLException {
-        // @ToDo
+    public boolean saveUser(String username, String password) throws SQLException {
         Database database = Database.getInstance();
         Connection c = database.getConnection();
 
@@ -78,19 +67,20 @@ public class AuthService {
 
         if (count > 0) {
             setTaken(true);
-            System.out.println("Name bereits taken...");
+            System.out.println("Name is taken...");
 
-            //senden ans frontend... @ToDo
-
-        } else {
-            PreparedStatement addstmt = c.prepareStatement(ADD_USER);
-            addstmt.setString(1, username);
-            addstmt.setString(2, password);
-
-            addstmt.executeUpdate();
-
-            System.out.println("User was succesfully added to the DB...");
-            System.out.println("You can now login into your account....");
+            return false;
         }
+
+        PreparedStatement addstmt = c.prepareStatement(ADD_USER);
+        addstmt.setString(1, username);
+        addstmt.setString(2, password);
+
+        addstmt.executeUpdate();
+
+        System.out.println("User was succesfully added to the DB...");
+        System.out.println("You can now login into your account....");
+
+        return true;
     }
 }
