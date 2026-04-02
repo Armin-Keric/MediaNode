@@ -48,7 +48,7 @@ public class MainController implements Initializable {
         ToggleButton src = (ToggleButton) actionEvent.getSource();
         String target = src.getId();
 
-        if(!target.isEmpty() && !target.equals("profile-layout-view.fxml")){
+        if(!target.isEmpty()){
             loadContentView(target);
         }
     }
