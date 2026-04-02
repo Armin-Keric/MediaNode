@@ -3,6 +3,7 @@ package com.frontend.controller.content;
 import com.backend.Database;
 import com.backend.model.*;
 import com.backend.service.AuthService;
+import com.backend.service.ListService;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -127,23 +128,8 @@ public class MediaDetailsViewController extends MediaViewController implements I
             System.out.println("Nicht eingeloggt");
 
         } else {
-            Database database = Database.getInstance();
-            Connection c = database.getConnection();
+            ListService.addToList(status,currentMedia.getId(),rating);
 
-            String sql = "INSERT INTO user_library (user_id, id, status, score) VALUES (?, ?, ?, ?) " +
-                    "ON CONFLICT (user_id, id) DO UPDATE SET status = EXCLUDED.status, score = EXCLUDED.score";
-
-            PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, AuthService.sessionId);
-            stmt.setInt(2, currentMedia.getId());
-            stmt.setString(3, status);
-
-            if (status.equals("PLANNING")) {
-                stmt.setInt(4, 0);
-            } else {
-                stmt.setInt(4, rating);
-            }
-            stmt.executeUpdate();
             currentRating.setText("Current Rating: " + rating);
         }
     }
