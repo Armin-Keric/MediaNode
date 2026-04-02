@@ -1,5 +1,11 @@
 package com.backend.model;
 
+import com.backend.Database;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Movie_details extends Media {
@@ -14,6 +20,35 @@ public class Movie_details extends Media {
         this.director = director;
         this.actors = actors;
         actors_img = actorsImg;
+    }
+
+    public static Movie_details getMovieDetails(int mediaId) throws SQLException {
+        Database database = Database.getInstance();
+        Connection c = database.getConnection();
+
+        String sql = "SELECT m.*, mo.length, mo.director, mo.actors, mo.actors_img " +
+                "FROM media m JOIN movie_details mo ON m.id = mo.id " +
+                "WHERE m.id = ?";
+
+        PreparedStatement stmt = c.prepareStatement(sql);
+        stmt.setInt(1, mediaId);
+        ResultSet res = stmt.executeQuery();
+
+        if (res.next()) {
+            return new Movie_details(
+                    res.getInt("id"),
+                    res.getString("title"),
+                    res.getObject("release_date", LocalDate.class),
+                    res.getString("type"),
+                    res.getString("description"),
+                    res.getString("img_url"),
+                    res.getInt("length"),
+                    res.getString("director"),
+                    res.getString("actors"),
+                    res.getString("actors_img")
+            );
+        }
+        return null;
     }
 
     public int getLength() {

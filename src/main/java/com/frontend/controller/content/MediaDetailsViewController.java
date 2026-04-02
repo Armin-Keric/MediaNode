@@ -1,6 +1,6 @@
 package com.frontend.controller.content;
 
-import com.backend.model.Media;
+import com.backend.model.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -15,14 +15,70 @@ public class MediaDetailsViewController extends MediaViewController {
     public Label titleLabel;
     public ListView<String> detailsListView;
 
-    public void setMedia(Media m) {
-        super.setMedia(m);
 
+    public void setMedia(Media m) throws SQLException {
+        try {
+            super.setMedia(m);
 
-        descriptionTextArea.setText(m.getDescription());
-        detailsListView.getItems().addAll(
-                m.getRelease_date().toString(),
-                m.getType()
-        );
+            switch (m.getType()) {
+                case "Game":
+                    int playtime = Game_details.getGameDetails(m.getId()).getPlaytime() / 3600;
+                    descriptionTextArea.setText(m.getDescription());
+                    detailsListView.getItems().addAll(
+                            "Type: " + m.getType(),
+                            "Release-Date: " + m.getRelease_date().toString(),
+                            "Platform: " + Game_details.getGameDetails(m.getId()).getPlatform(),
+                            "Publisher: " + Game_details.getGameDetails(m.getId()).getPublisher(),
+                            "Avg. Playtime: " + playtime + "h"
+                    );
+
+                    break;
+
+                case "TVshow":
+                case "Anime":
+                    descriptionTextArea.setText(m.getDescription());
+                    detailsListView.getItems().addAll(
+                            "Type: " + m.getType(),
+                            "Release-Date: " + m.getRelease_date().toString(),
+                            "Episodes: " + TVshow_details.getTVShowDetails(m.getId()).getEpisodeCount(),
+                            "Director: " + TVshow_details.getTVShowDetails(m.getId()).getDirector(),
+                            "Seasons: " + TVshow_details.getTVShowDetails(m.getId()).getSeasons(),
+                            "Actors: " + TVshow_details.getTVShowDetails(m.getId()).getActors()
+                    );
+                    break;
+                case "Music":
+                    int length_mu = Music_details.getMusicDetails(m.getId()).getLength() / 60;
+
+                    descriptionTextArea.setText(m.getDescription());
+                    detailsListView.getItems().addAll(
+                            "Type: " + m.getType(),
+                            "Release-Date: " + m.getRelease_date().toString(),
+                            "Length: " + length_mu + "min",
+                            "Artist: " + Music_details.getMusicDetails(m.getId()).getArtist(),
+                            "Album: " + Music_details.getMusicDetails(m.getId()).getAlbum()
+                    );
+
+                    break;
+
+                case "Movie":
+                    int length_mo = Movie_details.getMovieDetails(m.getId()).getLength() / 3600;
+                    int length_mo_min = (Movie_details.getMovieDetails(m.getId()).getLength() % 3600) / 60;
+
+                    descriptionTextArea.setText(m.getDescription());
+                    detailsListView.getItems().addAll(
+                            "Type: " + m.getType(),
+                            "Release-Date: " + m.getRelease_date().toString(),
+                            "Length: " + length_mo + "h" + length_mo_min + "min",
+                            "Director: " + Movie_details.getMovieDetails(m.getId()).getDirector(),
+                            "Actors: " + Movie_details.getMovieDetails(m.getId()).getActors()
+                    );
+
+                    break;
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
