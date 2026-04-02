@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 
 <StackPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.ProfileViewController">
     <children>
@@ -27,7 +26,6 @@
                     <children>
                         <VBox alignment="TOP_LEFT" spacing="10.0">
                             <children>
-                                <Circle fx:id="profileIcon" fill="DODGERBLUE" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
                                 <Label fx:id="userNameLabel" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="USERNAME" />
                                 <Label fx:id="biographyLabel" text="BIOGRAPHY" wrapText="true" />
                             </children>

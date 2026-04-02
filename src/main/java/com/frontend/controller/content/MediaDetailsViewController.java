@@ -1,6 +1,9 @@
 package com.frontend.controller.content;
 
+import com.backend.Database;
 import com.backend.model.*;
+import com.backend.service.AuthService;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -12,6 +15,8 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -24,21 +29,27 @@ public class MediaDetailsViewController extends MediaViewController implements I
     public ComboBox<String> statusComboBox;
     public Slider ratingSlider;
     public HBox recommendedHBox;
+    public Label currentRating;
+    private Media currentMedia;
+    private int rating;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         statusComboBox.getItems().addAll(
-                "PLANING",
+                "PLANNING",
                 "CONSUMING",
                 "COMPLETED"
         );
         statusComboBox.getSelectionModel().selectFirst();
+        //currentRating.setText("Current rating: " + rating);
     }
 
     public void setMedia(Media m) throws SQLException {
+        this.currentMedia = m;
         try {
             super.setMedia(m);
+            //User_library.getUserScore(m);
 
             switch (m.getType()) {
                 case "Game":
@@ -104,5 +115,36 @@ public class MediaDetailsViewController extends MediaViewController implements I
 
     public void onRatingSliderDragOver(DragEvent dragEvent) {
 
+    }
+
+    //makes the entries e.g. PLANNING, CONSUMING etc
+    public void addToMediaList(ActionEvent actionEvent) throws SQLException {
+        String status = statusComboBox.getSelectionModel().getSelectedItem();
+        rating = (int) ratingSlider.getValue();
+
+
+        if (AuthService.sessionId == 0) {
+            System.out.println("Nicht eingeloggt");
+
+        } else {
+            Database database = Database.getInstance();
+            Connection c = database.getConnection();
+
+            String sql = "INSERT INTO user_library (user_id, id, status, score) VALUES (?, ?, ?, ?) " +
+                    "ON CONFLICT (user_id, id) DO UPDATE SET status = EXCLUDED.status, score = EXCLUDED.score";
+
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, AuthService.sessionId);
+            stmt.setInt(2, currentMedia.getId());
+            stmt.setString(3, status);
+
+            if (status.equals("PLANNING")) {
+                stmt.setInt(4, 0);
+            } else {
+                stmt.setInt(4, rating);
+            }
+            stmt.executeUpdate();
+            currentRating.setText("Current Rating: " + rating);
+        }
     }
 }
