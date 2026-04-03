@@ -1,87 +1,137 @@
-/* AniList Style: Neutral Dark Grey & Ruby Red */
 .root {
-    /* Hintergrund: Sehr dunkles, neutrales Anthrazit */
-    -fx-background-color: #121212;
-    -fx-base-color: #121212;
+    -fx-base: #1e1e1e;
+    -fx-background: #121212;
     -fx-control-inner-background: #1e1e1e;
 
-    /* Akzent: Edles Rubinrot */
-    -fx-accent-color: #9e1b32;
-    -fx-focus-color: #9e1b32;
-
-    -fx-font-family: Consolas;
+    -lavender-accent: #a29bfe;
+    -dark-gray-bg: #121212;
+    -medium-gray: #2d2d2d;
+    -light-gray: #3d3d3d;
+    -text-white: #ffffff;
+    -text-muted: #b0b0b0;
 }
 
-/* Die Menüleiste oben */
 #menuBarHBox {
-    -fx-spacing: 20px;
-    -fx-padding: 15px 25px;
-    -fx-background-color: #181818; /* Minimal heller als der Hintergrund */
+    -fx-background-color: -medium-gray;
+    -fx-border-color: -lavender-accent;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 5 15;
+    -fx-spacing: 10;
     -fx-alignment: CENTER_LEFT;
-    -fx-border-color: #9e1b32;
-    -fx-border-width: 0 0 1 0; /* Dezente Trennlinie unten */
 }
 
-/* Gemeinsames Design für Eingaben und Buttons */
-.toggle-button, .text-field, .combo-box {
-    -fx-background-color: #1e1e1e; /* Dunkelgraue Flächen */
-    -fx-background-radius: 4px;
-    -fx-border-color: transparent;
-    -fx-text-fill: #a0a0a0; /* Neutrales Grau für Text */
-    -fx-font-size: 14px;
-}
-
-/* Hover-Zustand */
-.toggle-button:hover, .text-field:hover, .combo-box:hover {
-    -fx-background-color: #252525; /* Leichtes Aufhellen beim Drüberfahren */
-    -fx-text-fill: #ffffff;
-}
-
-/* Fokus & Selektiert (Der Rubinrot-Akzent) */
-.text-field:focused, .combo-box:focused {
-    -fx-background-color: #1e1e1e;
-    -fx-border-color: #9e1b32;
-    -fx-border-width: 0 0 2 0; /* Nur die Unterstreichung wie bei AniList */
-    -fx-text-fill: #ffffff;
-}
-
-/* Styling für die aktiven Menü-Buttons */
-.toggle-button:selected {
+#menuBarHBox .toggle-button {
     -fx-background-color: transparent;
-    -fx-text-fill: #9e1b32; /* Text wird Rubinrot */
+    -fx-text-fill: -text-muted;
     -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-background-radius: 0;
 }
 
-/* ComboBox Pfeil */
-.combo-box .arrow {
-    -fx-background-color: #707070;
-    -fx-shape: "M 0 0 L 4 4 L 8 0 Z";
-}
-.combo-box:hover .arrow, .combo-box:focused .arrow {
-    -fx-background-color: #9e1b32;
+#menuBarHBox .toggle-button:hover {
+    -fx-background-color: -light-gray;
+    -fx-text-fill: -text-white;
 }
 
-/* Dropdown / ContextMenu */
-.combo-box-base .context-menu {
-    -fx-background-color: #1e1e1e;
-    -fx-border-color: #333333;
-    -fx-border-radius: 4px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 15, 0, 0, 8);
+#menuBarHBox .toggle-button:selected {
+    -fx-background-color: transparent;
+    -fx-text-fill: -lavender-accent;
+    -fx-border-color: -lavender-accent;
+    -fx-border-width: 0 0 3 0;
 }
 
-.list-cell {
-    -fx-padding: 10px;
-    -fx-text-fill: #a0a0a0;
+#contentPane {
+    -fx-background-color: -dark-gray-bg;
+}
+
+.label {
+    -fx-text-fill: -text-white;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.anchor-pane, .stack-pane, .vbox, .hbox {
+    -fx-background-color: -dark-gray-bg;
+}
+
+.scroll-pane {
     -fx-background-color: transparent;
 }
-
-.list-cell:hover {
-    -fx-background-color: #282828;
-    -fx-text-fill: #9e1b32; /* Text im Dropdown wird bei Hover rot */
+.scroll-pane > .viewport {
+    -fx-background-color: -dark-gray-bg;
 }
 
-/* Fokus-Ring entfernen */
-.toggle-button:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
+.text-field, .password-field, .combo-box, .text-area {
+    -fx-background-color: -medium-gray;
+    -fx-text-fill: -text-white;
+    -fx-prompt-text-fill: -text-muted;
+    -fx-background-radius: 4;
+    -fx-border-color: transparent;
+    -fx-padding: 6 10;
+}
+
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: -lavender-accent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.button {
+    -fx-background-color: -lavender-accent;
+    -fx-text-fill: -dark-gray-bg;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #b2abff;
+}
+
+.toggle-button {
+    -fx-background-color: -medium-gray;
+    -fx-text-fill: -text-white;
+}
+
+.toggle-button:selected {
+    -fx-background-color: -lavender-accent;
+    -fx-text-fill: -dark-gray-bg;
+}
+
+.list-view, .table-view, .list-cell {
+    -fx-background-color: -dark-gray-bg;
+    -fx-text-fill: -text-white;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: -medium-gray;
+    -fx-text-fill: -lavender-accent;
+}
+
+.chart-bar {
+    -fx-bar-fill: -lavender-accent;
+}
+.axis {
+    -fx-tick-label-fill: -text-muted;
+}
+
+.descriptionHBox {
+    -fx-border-color: -medium-gray;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10;
+}
+
+.localMenuBarHBox {
+    -fx-spacing: 15;
+    -fx-padding: 10;
+}
+
+.slider .thumb {
+    -fx-background-color: -lavender-accent;
+}
+
+.slider .track {
+    -fx-background-color: -medium-gray;
+}
+
+.separator .line {
+    -fx-border-color: -medium-gray;
 }
