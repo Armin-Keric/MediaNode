@@ -1,12 +1,17 @@
 # MediaNode
 
-MediaNode is an application which lets the user record all kinds of media (e.g. Books, Music, Games, Movies,...) they already consumed or plan to consume. This project was hugely inspired by the websites <a href="https://backloggd.com">Backloggd</a> and <a href="https://anilist.co/home">AniList</a> 
+MediaNode is an application which lets the user record all kinds of media (e.g. Books, Music, Games, Movies,...) they already consumed or plan to consume. This project was hugely inspired by the websites <a href="https://backloggd.com">Backloggd</a> and <a href="https://anilist.co/home">AniList</a>.
 
 
-# Features
 
-- //WIP
+# :sparkles: Features 
 
+- Creating an account
+- SignIn/SignOut
+- Browsing media (that is stored in the database)
+- Viewing Details from Medias
+- Creating an entry either with the status `PLANNING` OR `CONSUMING` OR `COMPLETED`
+- Assign ratings for a specific media
 
 # Installation
 
@@ -14,7 +19,17 @@ MediaNode is an application which lets the user record all kinds of media (e.g. 
 ```zsh 
 https://github.com/Armin-Keric/MediaNode.git
 ```
-2. //WIP
+
+2. Go to your Terminal and type in the following command
+```zsh 
+docker compose up -d
+```
+>[!NOTE]
+>Make sure you're running the Docker Desktop application.
+
+> [!CAUTION]
+> This step does not work yet!
+
 
 # :rocket: Tech Stack
 - JavaFX 
