@@ -52,6 +52,7 @@ public class MediaDetailsViewController extends MediaViewController implements I
             if(AuthService.sessionId != 0){
                 rating = User_library.getUserData(m).score();
                 status = User_library.getUserData(m).status();
+                ratingSlider.setValue(rating);
             }
 
             //User_library.getUserScore(m);
@@ -85,6 +86,7 @@ public class MediaDetailsViewController extends MediaViewController implements I
                     );
                     currentRating.setText("Current rating: " + rating);
                     statusComboBox.setValue(status);
+
 
                     break;
                 case "Music":
@@ -143,6 +145,8 @@ public class MediaDetailsViewController extends MediaViewController implements I
 
             if(!status.equals("PLANNING")){
                 currentRating.setText("Current Rating: " + rating);
+                ratingSlider.setValue(rating);
+
 
             } else {
                 currentRating.setText("Current Rating: 0");
