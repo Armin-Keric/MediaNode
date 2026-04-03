@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
@@ -23,17 +24,18 @@ public class MediaListViewController implements Initializable {
     public HBox consumingArea;
     public HBox completedArea;
     public HBox planningArea;
+    public GridPane consumingGrid;
+    public GridPane completedGrid;
+    public GridPane planningGrid;
     private Database database;
     private Media media;
-    private AuthService service = new AuthService();
+    private final int OBJECTS_PER_ROW = 5;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            initializingLists();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        loadDynamicMediaAreas(consumingGrid,User_library.consuming);
+        loadDynamicMediaAreas(completedGrid,User_library.completed);
+        loadDynamicMediaAreas(planningGrid,User_library.planning);
     }
 
     public void initializingLists() throws SQLException {
@@ -62,6 +64,31 @@ public class MediaListViewController implements Initializable {
             tmpFriends.setMedia(User_library.planning.get(i));
         }
 
+    }
+
+    //Method from Browse-View...
+    private void loadDynamicMediaAreas(GridPane listGridPane, List<Media> libraryPart) {
+        listGridPane.getChildren().clear();
+
+        try {
+            int x = 0;
+            int y = 0;
+
+            for (int i = 0; i < libraryPart.size(); ++i) {
+                AnchorPane target = new AnchorPane();
+                listGridPane.add(target, x, y);
+
+                MediaViewController tmp = (MediaViewController) loadView(target, "media-embed-view.fxml", "MediaListGrid");
+                tmp.setMedia(libraryPart.get(i));
+
+                if (++x >= OBJECTS_PER_ROW) {
+                    x = 0;
+                    ++y;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //Method of MainController

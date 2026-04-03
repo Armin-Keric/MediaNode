@@ -28,7 +28,7 @@
                         <Label style="-fx-font-size: 20px;" text="Register" />
                         <TextField fx:id="signupUsernameField" promptText="Username" maxWidth="200.0"/>
                         <PasswordField fx:id="signupPasswordField" promptText="Password" maxWidth="200.0"/>
-                        <PasswordField fx:id="signupPasswordRepeatField" promptText="Repeat Passphrase" maxWidth="200.0"/>
+                        <PasswordField fx:id="signupPasswordRepeatField" promptText="Repeat Password" maxWidth="200.0"/>
                         <Button text="Creat Account" onAction="#onSignupClicked" />
                      </children>
                   </VBox>

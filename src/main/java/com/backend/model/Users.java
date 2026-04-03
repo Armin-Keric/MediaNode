@@ -2,11 +2,9 @@ package com.backend.model;
 
 
 import com.backend.Database;
+import com.backend.service.AuthService;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,28 +31,44 @@ public record Users(Integer user_id, String name, String password, String biogra
         return results;
     }
 
+    public static String getUser() throws SQLException {
+        Database database = Database.getInstance();
+        Connection c = database.getConnection();
+
+        String sql = "SELECT u.name FROM users u WHERE user_id = ?";
+
+        PreparedStatement stmt = c.prepareStatement(sql);
+        stmt.setInt(1, AuthService.sessionId);
+
+        ResultSet res = stmt.executeQuery();
+
+        if (res.next()) {
+            return res.getString("name");
+        }
+        return null;
+    }
+
     //@ToDo
 
     //we need this shit here for authorization
     //I somehow have to set the current user id from the user that logged in
     /**
-    public  Users getSession(String query) throws SQLException {
-        Database database = Database.getInstance();
-        Connection c = database.getConnection();
-        Statement stmt = c.createStatement();
-        ResultSet res = stmt.executeQuery(query);
+     public  Users getSession(String query) throws SQLException {
+     Database database = Database.getInstance();
+     Connection c = database.getConnection();
+     Statement stmt = c.createStatement();
+     ResultSet res = stmt.executeQuery(query);
 
-        while (res.next()) {
-            int x = res.getInt("user_id");
-            user_id(x);
-        }
+     while (res.next()) {
+     int x = res.getInt("user_id");
+     user_id(x);
+     }
 
-        return
-    }
+     return
+     }
 
-    @Override
-    public Integer user_id(int x) {
-        return user_id;
-    }
-    **/
+     @Override public Integer user_id(int x) {
+     return user_id;
+     }
+     **/
 }

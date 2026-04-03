@@ -23,7 +23,7 @@ public class MediaViewController {
      * meant for Media-Embed-View.fxml
      *
      */
-    public void setMedia(Media m) {
+    public void setMedia(Media m) throws SQLException {
         this.media = m;
 
         try {
@@ -67,7 +67,7 @@ public class MediaViewController {
         }
     }
 
-    public void onMediaEmbedClicked(MouseEvent mouseEvent) {
+    public void onMediaEmbedClicked(MouseEvent mouseEvent) throws SQLException {
         MainController main = MainController.getInstance();
         MediaDetailsViewController controller = (MediaDetailsViewController) main.loadView(
                 main.contentPane,

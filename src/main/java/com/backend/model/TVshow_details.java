@@ -1,5 +1,11 @@
 package com.backend.model;
 
+import com.backend.Database;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class TVshow_details extends Media {
@@ -16,6 +22,36 @@ public class TVshow_details extends Media {
         this.seasons = seasons;
         this.actors = actors;
         actors_img = acotrsImg;
+    }
+
+    public static TVshow_details getTVShowDetails(int mediaId) throws SQLException {
+        Database database = Database.getInstance();
+        Connection c = database.getConnection();
+
+        String sql = "SELECT m.*, tv.episodecount, tv.director, tv.seasons, tv.actors , tv.actors_img " +
+                "FROM media m JOIN tvshow_details tv ON m.id = tv.id " +
+                "WHERE m.id = ?";
+
+        PreparedStatement stmt = c.prepareStatement(sql);
+        stmt.setInt(1, mediaId);
+        ResultSet res = stmt.executeQuery();
+
+        if (res.next()) {
+            return new TVshow_details(
+                    res.getInt("id"),
+                    res.getString("title"),
+                    res.getObject("release_date", LocalDate.class),
+                    res.getString("type"),
+                    res.getString("description"),
+                    res.getString("img_url"),
+                    res.getInt("episodecount"), //
+                    res.getString("director"),
+                    res.getInt("seasons"),
+                    res.getString("actors"),
+                    res.getString("actors_img")
+            );
+        }
+        return null;
     }
 
     public int getEpisodeCount() {

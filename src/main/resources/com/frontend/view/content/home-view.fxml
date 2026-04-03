@@ -35,13 +35,9 @@
                <padding>
                   <Insets top="20.0" bottom="20.0" />
                </padding>
-
             </VBox>
 
             <VBox fx:id="futureContentArea" alignment="CENTER" prefHeight="600.0" spacing="20.0">
-               <children>
-                  <javafx.scene.control.Label text="<Content>" style="-fx-text-fill: gray; -fx-font-size: 70;" />
-               </children>
             </VBox>
 
          </children>
