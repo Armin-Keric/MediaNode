@@ -6,7 +6,6 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -27,11 +26,8 @@
                         <VBox alignment="TOP_LEFT" spacing="10.0">
                             <children>
                                 <Label fx:id="userNameLabel" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="USERNAME" />
-                                <Label fx:id="biographyLabel" text="BIOGRAPHY" wrapText="true" />
                             </children>
                         </VBox>
-
-                        <Separator />
 
                         <VBox spacing="10.0">
                             <children>

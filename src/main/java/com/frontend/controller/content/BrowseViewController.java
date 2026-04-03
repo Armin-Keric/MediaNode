@@ -3,6 +3,7 @@ package com.frontend.controller.content;
 import com.backend.model.Genres;
 import com.backend.model.Media;
 import com.frontend.MainController;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -47,6 +48,7 @@ public class BrowseViewController extends MainController implements Initializabl
             throw new RuntimeException(e);
         }
 
+        /**
         for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
             featuredAreaVBox.getChildren().add(new AnchorPane());
             //friendAreaVBox.getChildren().add(new AnchorPane());
@@ -63,12 +65,16 @@ public class BrowseViewController extends MainController implements Initializabl
                 throw new RuntimeException(e);
             }
         }
+         **/
 
-        try {
-            loadDynamicMediaAreas(Media.medias());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Platform.runLater(()->{
+            try {
+                loadDynamicMediaAreas(Media.medias());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
     }
 
     public void updateLists() throws SQLException {
@@ -83,6 +89,7 @@ public class BrowseViewController extends MainController implements Initializabl
     }
 
     private void loadDynamicMediaAreas(List<Media> mediaList) {
+        browseAreaGridPane.getChildren().clear();
         try {
             for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
                 // ??? featuredAreaVBox.getChildren().add(new AnchorPane());
