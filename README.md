@@ -2,7 +2,9 @@
 
 MediaNode is an application which lets the user record all kinds of media (e.g. Books, Music, Games, Movies,...) they already consumed or plan to consume. This project was hugely inspired by the websites <a href="https://backloggd.com">Backloggd</a> and <a href="https://anilist.co/home">AniList</a>.
 
+# 📸 Preview
 
+//
 
 # :sparkles: Features 
 
