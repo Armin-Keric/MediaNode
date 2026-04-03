@@ -1,6 +1,9 @@
 package com.frontend.controller.content;
 
 import com.backend.model.*;
+import com.backend.service.AuthService;
+import com.backend.service.ListService;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -24,21 +27,34 @@ public class MediaDetailsViewController extends MediaViewController implements I
     public ComboBox<String> statusComboBox;
     public Slider ratingSlider;
     public HBox recommendedHBox;
+    public Label currentRating;
+    private Media currentMedia;
+    private int rating;
+    private int finalrating;
+    private String status;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         statusComboBox.getItems().addAll(
-                "PLANING",
+                "PLANNING",
                 "CONSUMING",
                 "COMPLETED"
         );
-        statusComboBox.getSelectionModel().selectFirst();
+        //statusComboBox.getSelectionModel().selectFirst();
     }
 
     public void setMedia(Media m) throws SQLException {
+        this.currentMedia = m;
         try {
             super.setMedia(m);
+
+            if(AuthService.sessionId != 0){
+                rating = User_library.getUserData(m).score();
+                status = User_library.getUserData(m).status();
+            }
+
+            //User_library.getUserScore(m);
 
             switch (m.getType()) {
                 case "Game":
@@ -51,6 +67,8 @@ public class MediaDetailsViewController extends MediaViewController implements I
                             "Publisher: " + Game_details.getGameDetails(m.getId()).getPublisher(),
                             "Avg. Playtime: " + playtime + "h"
                     );
+                    currentRating.setText("Current rating: " + rating);
+                    statusComboBox.setValue(status);
 
                     break;
 
@@ -65,6 +83,9 @@ public class MediaDetailsViewController extends MediaViewController implements I
                             "Seasons: " + TVshow_details.getTVShowDetails(m.getId()).getSeasons(),
                             "Actors: " + TVshow_details.getTVShowDetails(m.getId()).getActors()
                     );
+                    currentRating.setText("Current rating: " + rating);
+                    statusComboBox.setValue(status);
+
                     break;
                 case "Music":
                     int length_mu = Music_details.getMusicDetails(m.getId()).getLength() / 60;
@@ -77,7 +98,8 @@ public class MediaDetailsViewController extends MediaViewController implements I
                             "Artist: " + Music_details.getMusicDetails(m.getId()).getArtist(),
                             "Album: " + Music_details.getMusicDetails(m.getId()).getAlbum()
                     );
-
+                    currentRating.setText("Current rating: " + rating);
+                    statusComboBox.setValue(status);
                     break;
 
                 case "Movie":
@@ -92,6 +114,8 @@ public class MediaDetailsViewController extends MediaViewController implements I
                             "Director: " + Movie_details.getMovieDetails(m.getId()).getDirector(),
                             "Actors: " + Movie_details.getMovieDetails(m.getId()).getActors()
                     );
+                    currentRating.setText("Current rating: " + rating);
+                    statusComboBox.setValue(status);
 
                     break;
 
@@ -104,5 +128,27 @@ public class MediaDetailsViewController extends MediaViewController implements I
 
     public void onRatingSliderDragOver(DragEvent dragEvent) {
 
+    }
+
+    //makes the entries e.g. PLANNING, CONSUMING etc
+    public void addToMediaList(ActionEvent actionEvent) throws SQLException {
+        String status = statusComboBox.getSelectionModel().getSelectedItem();
+        rating = (int) ratingSlider.getValue();
+
+        if (AuthService.sessionId == 0) {
+            System.out.println("Nicht eingeloggt");
+
+        } else {
+            ListService.addToList(status, currentMedia.getId(), rating);
+
+            if(!status.equals("PLANNING")){
+                currentRating.setText("Current Rating: " + rating);
+
+            } else {
+                currentRating.setText("Current Rating: 0");
+            }
+            statusComboBox.setValue(status);
+            ListService.getActivityLog(AuthService.sessionId);
+        }
     }
 }
