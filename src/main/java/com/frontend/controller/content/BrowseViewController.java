@@ -22,13 +22,12 @@ public class BrowseViewController extends MainController implements Initializabl
     public ComboBox<String> mediaYearComboBox;
     public HBox featuredAreaVBox;
     public HBox friendAreaVBox;
-    public GridPane browseAreaVBox;
+    public GridPane browseAreaGridPane;
     private Media m;
+    private final int OBJECTS_PER_ROW = 5;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int OBJECTS_PER_ROW = 5;
-        int OBJECTS_PER_COL = 5;
         // tmp
         String[] mediaTypes = new String[]{"ALL","Anime", "Game", "Music", "Movie", "TVshow"};
 
@@ -50,41 +49,69 @@ public class BrowseViewController extends MainController implements Initializabl
 
         for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
             featuredAreaVBox.getChildren().add(new AnchorPane());
-            friendAreaVBox.getChildren().add(new AnchorPane());
+            //friendAreaVBox.getChildren().add(new AnchorPane());
 
             MediaViewController tmpFeatured = (MediaViewController) loadView((AnchorPane) featuredAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
+            //MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
 
             try {
                 tmpFeatured.setMedia(Media.medias_type("Game").get(i));
 
                 //the media shown should always be sorted by date at the start...
-                tmpFriends.setMedia(Media.medias().get(i));
+                //tmpFriends.setMedia(Media.medias().get(i));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
+
+        try {
+            loadDynamicMediaAreas(Media.medias());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void updateLists() throws SQLException {
-        int OBJECTS_PER_ROW = 5;
         String typeOfMedia = mediaTypeComboBox.getSelectionModel().getSelectedItem();
         String genre = String.valueOf(mediaGenreComboBox.getSelectionModel().getSelectedItem());
         String year = mediaYearComboBox.getSelectionModel().getSelectedItem();
 
-
         friendAreaVBox.getChildren().clear();
         List<Media> currentData = Media.getCurrentData(typeOfMedia, genre, year);
 
+        loadDynamicMediaAreas(currentData);
+    }
 
-        for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
-            featuredAreaVBox.getChildren().add(new AnchorPane());
-            friendAreaVBox.getChildren().add(new AnchorPane());
+    private void loadDynamicMediaAreas(List<Media> mediaList) {
+        try {
+            for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
+                // ??? featuredAreaVBox.getChildren().add(new AnchorPane());
+                friendAreaVBox.getChildren().add(new AnchorPane());
 
-            MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            tmpFriends.setMedia(currentData.get(i));
+                MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
+                tmpFriends.setMedia(mediaList.get(i));
 
-            //tmpFriends.setMedia(,,);
+                //tmpFriends.setMedia(,,);
+            }
+
+            int x = 0;
+            int y = 0;
+
+            for (int i = 0; mediaList.get(i) != null; ++i) {
+                AnchorPane target = new AnchorPane();
+                browseAreaGridPane.add(target, x, y);
+
+                MediaViewController tmp = (MediaViewController) loadView(target, "media-embed-view.fxml", "BrowseController init BrowseGridPane");
+                tmp.setMedia(mediaList.get(i));
+
+                // calc new pos
+                if (++x >= OBJECTS_PER_ROW) {
+                    x = 0;
+                    ++y;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

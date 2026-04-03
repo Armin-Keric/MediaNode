@@ -32,7 +32,7 @@
             <Region prefHeight="20.0" />
             <HBox fx:id="featuredAreaVBox" alignment="TOP_CENTER" />
             <HBox fx:id="friendAreaVBox" alignment="TOP_CENTER" />
-            <GridPane fx:id="browseAreaVBox" alignment="TOP_CENTER" />
+            <GridPane fx:id="browseAreaGridPane" alignment="TOP_CENTER" />
             <Region prefHeight="20.0" />
          </children>
       </VBox>
