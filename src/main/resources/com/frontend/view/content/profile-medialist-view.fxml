@@ -7,6 +7,8 @@
 
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
 <ScrollPane fitToWidth="true" stylesheets="@../../style/browse-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frontend.controller.content.MediaListViewController">
     <content>
         <VBox alignment="TOP_CENTER" spacing="30.0">
@@ -15,28 +17,21 @@
             </padding>
             <children>
 
-
-                <HBox spacing="10.0" maxWidth="1000.0">
+                <VBox spacing="10.0" maxWidth="1000.0">
                     <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #555;" text="CONSUMING"/>
-                    <HBox fx:id="consumingArea" alignment="TOP_CENTER" />
-                </HBox>
+                    <GridPane fx:id="consumingGrid" alignment="TOP_LEFT" hgap="15.0" vgap="15.0" />
+                </VBox>
 
-                <HBox spacing="10.0" maxWidth="1000.0">
+                <VBox spacing="10.0" maxWidth="1000.0">
                     <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #555;" text="COMPLETED"/>
-                    <HBox fx:id="completedArea" alignment="TOP_CENTER" />
-                </HBox>
+                    <GridPane fx:id="completedGrid" alignment="TOP_LEFT" hgap="15.0" vgap="15.0" />
+                </VBox>
 
-                <HBox spacing="10.0" maxWidth="1000.0">
+                <VBox spacing="10.0" maxWidth="1000.0">
                     <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #555;" text="PLANNING"/>
-                    <HBox fx:id="planningArea" alignment="TOP_CENTER" />
+                    <GridPane fx:id="planningGrid" alignment="TOP_LEFT" hgap="15.0" vgap="15.0" />
+                </VBox>
 
-                </HBox>
-
-
-
-                <!--
-
--->
             </children>
         </VBox>
     </content>
