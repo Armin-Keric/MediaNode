@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class HomeViewController extends MainController implements Initializable {
+public class HomeViewController implements Initializable {
 
     public ImageView mainCarouselImageView;
     public HBox paginationContainer;
