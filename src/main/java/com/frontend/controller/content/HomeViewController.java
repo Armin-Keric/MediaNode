@@ -1,5 +1,6 @@
 package com.frontend.controller.content;
 
+import com.backend.model.Media;
 import com.frontend.MainController;
 import javafx.animation.FadeTransition;
 import javafx.fxml.Initializable;
@@ -7,33 +8,72 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class HomeViewController implements Initializable {
+public class HomeViewController extends MainController implements Initializable {
 
     public ImageView mainCarouselImageView;
     public HBox paginationContainer;
 
     private final List<String> imageURLs = new ArrayList<>();
+    private final List<Media> carouselMedias = new ArrayList<>();
     private final ToggleGroup dotGroup = new ToggleGroup();
+    public HBox trendingArea;
     private int currentIndex = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Test-URL
-        imageURLs.add("https://p3-ofp.static.pub//fes/cms/2024/09/12/0htn589or1vvi4zfkiwlxw8zorx5tm707792.png");
-        imageURLs.add("https://w0.peakpx.com/wallpaper/178/348/HD-wallpaper-game-of-thrones02-cool-tv-series-entertainment-fun-game-of-thrones-thumbnail.jpg");
-        imageURLs.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqrd0xUAAXtm-P_-79m65AW_SvTPa7ctXPAw&s");
-        imageURLs.add("https://images.mubicdn.net/images/film/395525/cache-922134-1745502042/image-w1280.jpg?size=800x");
+        try {
+            carouselMedias.addAll(Media.medias_release("DESC"));
+            imageURLs.add("https://pbs.twimg.com/media/HA_klpObUAAqglN?format=jpg&name=large");
+            imageURLs.add("https://www.kojimaproductions.jp/sites/default/files/2025-03/ds2_keyimage_withoutreleasedate_16x9.jpg");
+            imageURLs.add("https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2025/05/clairobscur.jpeg");
+            imageURLs.add("https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/YMUoJUYNX0xWk6eTKuZLr5Iw.jpg");
 
-        setupPagination();
-        updateUI(false);
+            setupPagination();
+            updateUI(false);
+            setTrendingArea();
+            mainCarouselImageView.setOnMouseClicked(e -> {
+                try {
+                    Media selectedMedia = carouselMedias.get(currentIndex);
+
+                    // Der gleiche Code wie in deinem MediaViewController
+                    MainController main = MainController.getInstance();
+                    MediaDetailsViewController controller = (MediaDetailsViewController) main.loadView(
+                            main.contentPane,
+                            "media-fullscreen-view.fxml",
+                            "Carousel Click"
+                    );
+
+                    controller.setMedia(selectedMedia);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setTrendingArea() throws SQLException {
+        int OBJECTS_PER_ROW = 5;
+        int x = 0;
+        int y = 0;
+
+        for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
+            trendingArea.getChildren().add(new AnchorPane());
+
+            MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) trendingArea.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
+            tmpFriends.setMedia(Media.medias_release("DESC").get(i));
+        }
     }
 
     private void setupPagination() {

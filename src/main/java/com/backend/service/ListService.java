@@ -58,7 +58,7 @@ public class ListService {
     public static XYChart.Series<String, Number> getRatings() throws SQLException {
         Database database = Database.getInstance();
         Connection c = database.getConnection();
-        XYChart.Series<String,Number> result = new XYChart.Series<>();
+        XYChart.Series<String, Number> result = new XYChart.Series<>();
 
         String sql = "SELECT score, COUNT(*) AS total FROM user_library WHERE user_id = ? AND score > 0 GROUP BY score ORDER BY score ASC";
 
@@ -70,7 +70,45 @@ public class ListService {
         while (rs.next()) {
             String value = String.valueOf(rs.getInt("score"));
             int total = rs.getInt("total");
-            result.getData().add(new XYChart.Data<>(value,total));
+            result.getData().add(new XYChart.Data<>(value, total));
+        }
+
+        return result;
+    }
+
+    public static List<Media> getRecommendations() throws SQLException {
+        Database database = Database.getInstance();
+        Connection c = database.getConnection();
+        List<Media> result = new ArrayList<>();
+
+        String sql = "SELECT * FROM (" +
+                "  SELECT DISTINCT m.* FROM media m " +
+                "  JOIN media_genres mg USING (id) " +
+                "  WHERE mg.genre_id IN (" +
+                "    SELECT DISTINCT mg2.genre_id FROM user_library ul " +
+                "    JOIN media_genres mg2 USING (id) " +
+                "    WHERE ul.user_id = ? AND ul.score >= 5" +
+                "  ) " +
+                "  AND m.id NOT IN (SELECT id FROM user_library WHERE user_id = ?)" +
+                ") AS subquery " +
+                "ORDER BY RANDOM() LIMIT 10";
+
+        PreparedStatement stmt = c.prepareStatement(sql);
+        stmt.setInt(1, AuthService.sessionId);
+        stmt.setInt(2, AuthService.sessionId);
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Media m = new Media(
+                    rs.getInt("id"),
+                    rs.getString("title"),
+                    rs.getObject("release_date", LocalDate.class),
+                    rs.getString("type"),
+                    rs.getString("description"),
+                    rs.getString("img_url")
+            );
+            result.add(m);
         }
 
         return result;
