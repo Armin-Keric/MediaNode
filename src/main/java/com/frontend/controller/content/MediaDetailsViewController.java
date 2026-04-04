@@ -55,7 +55,8 @@ public class MediaDetailsViewController extends MediaViewController implements I
         try {
             super.setMedia(m);
 
-            if (AuthService.sessionId != 0) {
+            User_library userData = User_library.getUserData(m);
+            if (AuthService.sessionId != 0 && userData != null && userData.status() != null) {
                 rating = User_library.getUserData(m).score();
                 status = User_library.getUserData(m).status();
                 ratingSlider.setValue(rating);

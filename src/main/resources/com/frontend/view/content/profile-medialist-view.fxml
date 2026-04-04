@@ -18,17 +18,17 @@
             <children>
 
                 <VBox spacing="10.0" maxWidth="1000.0">
-                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #555;" text="CONSUMING"/>
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #a29bfe;" text="CONSUMING"/>
                     <GridPane fx:id="consumingGrid" alignment="TOP_LEFT" hgap="15.0" vgap="15.0" />
                 </VBox>
 
                 <VBox spacing="10.0" maxWidth="1000.0">
-                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #555;" text="COMPLETED"/>
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #a29bfe;" text="COMPLETED"/>
                     <GridPane fx:id="completedGrid" alignment="TOP_LEFT" hgap="15.0" vgap="15.0" />
                 </VBox>
 
                 <VBox spacing="10.0" maxWidth="1000.0">
-                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #555;" text="PLANNING"/>
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #a29bfe;" text="PLANNING"/>
                     <GridPane fx:id="planningGrid" alignment="TOP_LEFT" hgap="15.0" vgap="15.0" />
                 </VBox>
 

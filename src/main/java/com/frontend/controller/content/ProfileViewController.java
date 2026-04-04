@@ -1,38 +1,29 @@
 package com.frontend.controller.content;
 
-import com.backend.model.Media;
 import com.backend.model.Users;
 import com.backend.service.AuthService;
 import com.backend.service.ListService;
-import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ProfileViewController implements Initializable {
-    public Circle profileIcon;
     public Label userNameLabel;
-    public Label biographyLabel;
-    public GridPane favMediaGridPane;
     public BarChart userGraphChart;
     public ListView<String> overViewListView;
     //public AnchorPane contentPane;
     //public AuthService authService = new AuthService();
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ProfileLayoutViewController.getInstance().selectMenuButton("profile-view.fxml");
         try {
             loadBarChart();
             overViewListView.getItems().clear();

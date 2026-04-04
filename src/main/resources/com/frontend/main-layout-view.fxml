@@ -11,7 +11,7 @@
          <children>
             <ToggleButton id="home-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Home" />
             <ToggleButton id="browse-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Browse" />
-            <ToggleButton id="authentication-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Auth  (tmp)" />
+            <ToggleButton id="authentication-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Auth" />
             <Region id="groupIgnore" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <ToggleButton id="profile-layout-view.fxml" mnemonicParsing="false" onAction="#onMenuBarButtonClicked" text="Profile" />
          </children></HBox>
