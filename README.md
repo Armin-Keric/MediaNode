@@ -4,7 +4,9 @@ MediaNode is an application which lets the user track all kinds of media (e.g. B
 
 # 📸 Preview
 
-//
+<img src="/docs/img/HomeView.png">
+
+<img src="/docs/img/DetailsView.png">
 
 # :sparkles: Features 
 
