@@ -9,8 +9,9 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="30.0" spacing="10.0">
                <children>
-                  <ToggleButton fx:id="loginToggle" selected="true" text="Login" onAction="#toggleAuthMode" />
+                  <ToggleButton fx:id="loginToggle" id="loginToggleButton" selected="true" text="Login" onAction="#toggleAuthMode" />
                   <ToggleButton fx:id="signupToggle" text="Signup" onAction="#toggleAuthMode" />
+                  <ToggleButton fx:id="logoutToggle" text="Logout" onAction="#logout" />
                </children>
             </HBox>
             <StackPane>
@@ -29,7 +30,7 @@
                         <TextField fx:id="signupUsernameField" promptText="Username" maxWidth="200.0"/>
                         <PasswordField fx:id="signupPasswordField" promptText="Password" maxWidth="200.0"/>
                         <PasswordField fx:id="signupPasswordRepeatField" promptText="Repeat Password" maxWidth="200.0"/>
-                        <Button text="Creat Account" onAction="#onSignupClicked" />
+                        <Button text="Create Account" onAction="#onSignupClicked" />
                      </children>
                   </VBox>
                </children>

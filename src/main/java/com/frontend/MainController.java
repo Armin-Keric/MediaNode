@@ -33,6 +33,7 @@ public class MainController implements Initializable {
                 tmp.setToggleGroup(menuBarToggleGroup);
             }
         }
+        selectMenuButton("home-view.fxml");
 
         // load a default site
         loadContentView("home-view.fxml");
@@ -48,8 +49,23 @@ public class MainController implements Initializable {
         ToggleButton src = (ToggleButton) actionEvent.getSource();
         String target = src.getId();
 
-        if(!target.isEmpty()){
+        if (!target.isEmpty()) {
             loadContentView(target);
+        }
+    }
+
+    /**
+     * toggles the correct Button in the navbar
+     * (used in ProfileLayoutViewController)
+     *
+     * @param buttonId target ToggleButton
+     */
+    public void selectMenuButton(String buttonId) {
+        for (Node node : menuBarHBox.getChildren()) {
+            if (node instanceof ToggleButton && buttonId.equals(node.getId())) {
+                ((ToggleButton) node).setSelected(true);
+                break;
+            }
         }
     }
 

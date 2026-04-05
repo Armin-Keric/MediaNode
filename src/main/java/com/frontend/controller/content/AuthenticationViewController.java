@@ -20,6 +20,7 @@ public class AuthenticationViewController extends MainController implements Init
     public PasswordField signupPasswordRepeatField;
     public VBox signupContainer;
     public ToggleButton signupToggle;
+    public ToggleButton logoutToggle;
     public Label warningLabel;
 
     public AuthService authService = new AuthService();
@@ -28,6 +29,7 @@ public class AuthenticationViewController extends MainController implements Init
         ToggleGroup internalGroup = new ToggleGroup();
         loginToggle.setToggleGroup(internalGroup);
         signupToggle.setToggleGroup(internalGroup);
+        logoutToggle.setToggleGroup(internalGroup);
     }
 
     /**
@@ -48,6 +50,22 @@ public class AuthenticationViewController extends MainController implements Init
         warningLabel.setText("");
     }
 
+    public void logout(ActionEvent actionEvent) {
+        //ToggleButton src = (ToggleButton) actionEvent.getSource();
+
+        if (AuthService.sessionId == 0) {
+            loginToggle.setSelected(true);
+            logoutToggle.setSelected(false);
+            warningLabel.setText("Must be logged in!");
+        } else {
+            AuthService.sessionId = 0;
+            MainController.getInstance().loadContentView("home-view.fxml");
+            MainController.getInstance().selectMenuButton("home-view.fxml");
+            System.out.println(AuthService.sessionId);
+        }
+
+    }
+
     public void onLoginClicked(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -62,6 +80,7 @@ public class AuthenticationViewController extends MainController implements Init
             if (authService.checkLogin(username, password)) {
                 MainController tmp = MainController.getInstance();
                 tmp.loadView(tmp.contentPane, "profile-layout-view.fxml", "AuthenticationController loading ProfileLayout");
+                MainController.getInstance().selectMenuButton("profile-layout-view.fxml");
                 return;
             }
 
@@ -86,12 +105,17 @@ public class AuthenticationViewController extends MainController implements Init
             return;
         }
 
-        try {
-            authService.saveUser(username, password);
-            warningLabel.setText("User created!");
-            loginToggle.fire();
-        } catch (Exception e) {
-            warningLabel.setText("Signup failed: " + e.getMessage());
+        if (AuthService.sessionId != 0) {
+            warningLabel.setText("Logout first!");
+        } else {
+
+            try {
+                authService.saveUser(username, password);
+                warningLabel.setText("User created!");
+                loginToggle.fire();
+            } catch (Exception e) {
+                warningLabel.setText("Signup failed: " + e.getMessage());
+            }
         }
     }
 }

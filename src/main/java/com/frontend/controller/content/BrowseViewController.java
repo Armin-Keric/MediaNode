@@ -91,16 +91,6 @@ public class BrowseViewController extends MainController implements Initializabl
     private void loadDynamicMediaAreas(List<Media> mediaList) {
         browseAreaGridPane.getChildren().clear();
         try {
-            for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
-                // ??? featuredAreaVBox.getChildren().add(new AnchorPane());
-                friendAreaVBox.getChildren().add(new AnchorPane());
-
-                MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-                tmpFriends.setMedia(mediaList.get(i));
-
-                //tmpFriends.setMedia(,,);
-            }
-
             int x = 0;
             int y = 0;
 

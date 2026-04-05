@@ -13,9 +13,12 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ProfileLayoutViewController extends MainController implements Initializable {
+    private static ProfileLayoutViewController instance;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        instance = this;
+
         //here we need to look if it really IS a ToggleButton
         for (Node node : menuBarHBox.getChildren()) {
             if (node instanceof ToggleButton && node.getId() != null) {
@@ -38,6 +41,11 @@ public class ProfileLayoutViewController extends MainController implements Initi
         }
 
         System.out.println("Falsch!");
+    }
+
+    //same thing like in the MainController
+    public static ProfileLayoutViewController getInstance() {
+        return instance;
     }
 }
 
