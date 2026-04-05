@@ -48,25 +48,6 @@ public class BrowseViewController extends MainController implements Initializabl
             throw new RuntimeException(e);
         }
 
-        /**
-        for (int i = 0; i < OBJECTS_PER_ROW; ++i) {
-            featuredAreaVBox.getChildren().add(new AnchorPane());
-            //friendAreaVBox.getChildren().add(new AnchorPane());
-
-            MediaViewController tmpFeatured = (MediaViewController) loadView((AnchorPane) featuredAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-            //MediaViewController tmpFriends = (MediaViewController) loadView((AnchorPane) friendAreaVBox.getChildren().get(i), "media-embed-view.fxml", "BrowseController");
-
-            try {
-                tmpFeatured.setMedia(Media.medias_type("Game").get(i));
-
-                //the media shown should always be sorted by date at the start...
-                //tmpFriends.setMedia(Media.medias().get(i));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-         **/
-
         Platform.runLater(()->{
             try {
                 loadDynamicMediaAreas(Media.medias());
@@ -74,7 +55,6 @@ public class BrowseViewController extends MainController implements Initializabl
                 throw new RuntimeException(e);
             }
         });
-
     }
 
     public void updateLists() throws SQLException {

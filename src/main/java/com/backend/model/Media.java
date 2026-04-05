@@ -1,12 +1,10 @@
 package com.backend.model;
 
 import com.backend.Database;
-import com.backend.Queries;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class Media {

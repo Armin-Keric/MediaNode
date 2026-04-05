@@ -25,27 +25,4 @@ public class Database {
     public Connection getConnection() {
         return connection;
     }
-
-    /**
-     //Übergabe verläuft im JavaFX Teil!
-     public ResultSet getGenreResultSet(String genre) throws SQLException {
-     String query = queries.getMediaByGenre(genre);
-     return statement.executeQuery(query);
-     }
-
-     public ResultSet getMediaResultSet(String order) throws SQLException {
-     String query = queries.getMedia(order);
-     return statement.executeQuery(query);
-     }
-
-     public ResultSet getMediaByTypeResultSet(String type) throws SQLException {
-     String query = queries.getMediaByType(type);
-     return statement.executeQuery(query);
-     }
-
-     public ResultSet getMediaByReleaseDateResultSet(String order) throws SQLException {
-     String query = queries.getMediaByDate(order);
-     return statement.executeQuery(query);
-     }
-     **/
 }
