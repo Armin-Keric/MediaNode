@@ -49,10 +49,6 @@ public class Book_details extends Media {
         return null;
     }
 
-
-
-
-
     public int getPageCount() {
         return pageCount;
     }

@@ -23,6 +23,14 @@ public class AuthService {
         isTaken = taken;
     }
 
+    /**
+     * method that logs the user in. The sessionId becomes the value of the
+     * user_id that is storeed in the DB
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public boolean checkLogin(String username, String password) throws SQLException {
         Database database = Database.getInstance();
         Connection c = database.getConnection();
@@ -48,6 +56,14 @@ public class AuthService {
         return false;
     }
 
+    /**
+     * adds the user to the DB
+     * NO HASH OF PASSWORD PROVIDED!
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public boolean saveUser(String username, String password) throws SQLException {
         Database database = Database.getInstance();
         Connection c = database.getConnection();

@@ -147,11 +147,14 @@ public class MediaDetailsViewController extends MediaViewController implements I
 
         if (AuthService.sessionId == 0) {
             System.out.println("Nicht eingeloggt");
+            currentRating.setText("Please login first!");
 
         } else {
             ListService.addToList(status, currentMedia.getId(), rating);
 
-            if (!status.equals("PLANNING")) {
+            if (!status.equals("PLANNING") && !status.isEmpty()) {
+                currentRating.setText("");
+                System.out.println("Test 123" + status);
                 currentRating.setText("Current Rating: " + rating);
                 ratingSlider.setValue(rating);
 

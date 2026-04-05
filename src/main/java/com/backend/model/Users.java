@@ -10,6 +10,7 @@ import java.util.List;
 
 public record Users(Integer user_id, String name, String password, String biography, String img_url) {
 
+    //returns a list of the users... we don't use this method right now though
     public static List<Users> getUsers() throws SQLException {
         Database database = Database.getInstance();
         List<Users> results = new ArrayList<>();
@@ -31,6 +32,12 @@ public record Users(Integer user_id, String name, String password, String biogra
         return results;
     }
 
+    /**
+     * using this method just for setting the username at the profile view
+     *
+     * @return
+     * @throws SQLException
+     */
     public static String getUser() throws SQLException {
         Database database = Database.getInstance();
         Connection c = database.getConnection();
@@ -47,28 +54,4 @@ public record Users(Integer user_id, String name, String password, String biogra
         }
         return null;
     }
-
-    //@ToDo
-
-    //we need this shit here for authorization
-    //I somehow have to set the current user id from the user that logged in
-    /**
-     public  Users getSession(String query) throws SQLException {
-     Database database = Database.getInstance();
-     Connection c = database.getConnection();
-     Statement stmt = c.createStatement();
-     ResultSet res = stmt.executeQuery(query);
-
-     while (res.next()) {
-     int x = res.getInt("user_id");
-     user_id(x);
-     }
-
-     return
-     }
-
-     @Override public Integer user_id(int x) {
-     return user_id;
-     }
-     **/
 }

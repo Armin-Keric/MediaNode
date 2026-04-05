@@ -14,10 +14,14 @@ public record User_library(Integer user_id, Integer id, String status, int score
     public static List<Media> planning = new ArrayList<>();
 
 
+    /**
+     * getuserList() builds the media list from the current user
+     * @param session_id current session (user that logged in)
+     * @throws SQLException
+     */
     public static void getUserList(int session_id) throws SQLException {
         Database database = Database.getInstance();
         Connection c = database.getConnection();
-
         String sql = "SELECT DISTINCT m.*, ul.status FROM media m JOIN user_library ul USING(id) WHERE ul.status IN ('PLANNING','CONSUMING','COMPLETED') AND ul.user_id = ? ORDER BY m.title ASC";
 
         PreparedStatement stmt = c.prepareStatement(sql);
@@ -54,6 +58,13 @@ public record User_library(Integer user_id, Integer id, String status, int score
             }
         }
     }
+
+    /**
+     * returns a User_library object that has the data(e.g. rating) of the User
+     * @param m current media
+     * @return
+     * @throws SQLException
+     */
     public static User_library getUserData(Media m) throws SQLException {
         Database database = Database.getInstance();
         Connection c = database.getConnection();

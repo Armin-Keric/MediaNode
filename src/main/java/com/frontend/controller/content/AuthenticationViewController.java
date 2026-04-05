@@ -61,6 +61,7 @@ public class AuthenticationViewController extends MainController implements Init
             AuthService.sessionId = 0;
             MainController.getInstance().loadContentView("home-view.fxml");
             MainController.getInstance().selectMenuButton("home-view.fxml");
+
             System.out.println(AuthService.sessionId);
         }
 

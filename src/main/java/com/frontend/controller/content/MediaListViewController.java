@@ -33,9 +33,9 @@ public class MediaListViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadDynamicMediaAreas(consumingGrid,User_library.consuming);
-        loadDynamicMediaAreas(completedGrid,User_library.completed);
-        loadDynamicMediaAreas(planningGrid,User_library.planning);
+        loadDynamicMediaAreas(consumingGrid, User_library.consuming);
+        loadDynamicMediaAreas(completedGrid, User_library.completed);
+        loadDynamicMediaAreas(planningGrid, User_library.planning);
     }
 
     public void initializingLists() throws SQLException {
@@ -70,24 +70,27 @@ public class MediaListViewController implements Initializable {
     private void loadDynamicMediaAreas(GridPane listGridPane, List<Media> libraryPart) {
         listGridPane.getChildren().clear();
 
-        try {
-            int x = 0;
-            int y = 0;
+        if (AuthService.sessionId != 0) {
 
-            for (int i = 0; i < libraryPart.size(); ++i) {
-                AnchorPane target = new AnchorPane();
-                listGridPane.add(target, x, y);
+            try {
+                int x = 0;
+                int y = 0;
 
-                MediaViewController tmp = (MediaViewController) loadView(target, "media-embed-view.fxml", "MediaListGrid");
-                tmp.setMedia(libraryPart.get(i));
+                for (int i = 0; i < libraryPart.size(); ++i) {
+                    AnchorPane target = new AnchorPane();
+                    listGridPane.add(target, x, y);
 
-                if (++x >= OBJECTS_PER_ROW) {
-                    x = 0;
-                    ++y;
+                    MediaViewController tmp = (MediaViewController) loadView(target, "media-embed-view.fxml", "MediaListGrid");
+                    tmp.setMedia(libraryPart.get(i));
+
+                    if (++x >= OBJECTS_PER_ROW) {
+                        x = 0;
+                        ++y;
+                    }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -112,6 +115,7 @@ public class MediaListViewController implements Initializable {
 
         return null;
     }
+
     //-
     //Method of MainController
     private String getContentViewFolder() {

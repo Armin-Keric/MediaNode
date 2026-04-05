@@ -76,6 +76,7 @@ public class ListService {
         return result;
     }
 
+    //method for the recommendation algorithmn at the Details-View...
     public static List<Media> getRecommendations() throws SQLException {
         Database database = Database.getInstance();
         Connection c = database.getConnection();
