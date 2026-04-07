@@ -16,9 +16,11 @@ MediaNode is an application which lets the user track all kinds of media (e.g. B
 - Creating an account
 - SignIn/SignOut
 - Browsing media (that is stored in the database)
-- Viewing Details from Medias
+- Searching for a medium with a search field
+- Viewing details from medias
 - Creating an entry either with the status `PLANNING` OR `CONSUMING` OR `COMPLETED`
 - Assign ratings for a specific media
+- View your activity log at your profile
 
 # Prerequisities
 - Docker Desktop
