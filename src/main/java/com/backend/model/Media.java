@@ -40,6 +40,30 @@ public class Media {
         return results;
     }
 
+    public static List<Media> getSearchedMedia(String searchFieldText) throws SQLException {
+        Database database = Database.getInstance();
+        List<Media> results = new ArrayList<>();
+        Connection c = database.getConnection();
+        String sql = "SELECT m.* FROM media m WHERE m.title ILIKE '%' || ? || '%'";
+        PreparedStatement stmt = c.prepareStatement(sql);
+        stmt.setString(1, searchFieldText);
+        ResultSet res = stmt.executeQuery();
+
+        while (res.next()) {
+            Media m = new Media(
+                    res.getInt("id"),
+                    res.getString("title"),
+                    res.getObject("release_date", LocalDate.class),
+                    res.getString("type"),
+                    res.getString("description"),
+                    res.getString("img_url")
+            );
+            results.add(m);
+        }
+
+        return results;
+    }
+
     public static List<Media> medias_release(String order) throws SQLException {
         Database database = Database.getInstance();
         List<Media> results = new ArrayList<>();

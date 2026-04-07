@@ -4,6 +4,7 @@ import com.backend.model.Genres;
 import com.backend.model.Media;
 import com.frontend.MainController;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -62,6 +63,7 @@ public class BrowseViewController extends MainController implements Initializabl
         String genre = String.valueOf(mediaGenreComboBox.getSelectionModel().getSelectedItem());
         String year = mediaYearComboBox.getSelectionModel().getSelectedItem();
 
+        searchTextField.clear();
         friendAreaVBox.getChildren().clear();
         List<Media> currentData = Media.getCurrentData(typeOfMedia, genre, year);
 
@@ -102,5 +104,12 @@ public class BrowseViewController extends MainController implements Initializabl
 
     public void getSelectedYear() throws SQLException {
         updateLists();
+    }
+
+    public void searchForMedia(ActionEvent actionEvent) throws SQLException {
+        TextField source = (TextField) actionEvent.getSource();
+        String target = source.getText();
+
+        loadDynamicMediaAreas(Media.getSearchedMedia(target));
     }
 }
