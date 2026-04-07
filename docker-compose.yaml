@@ -4,9 +4,9 @@ services:
     restart: always
     environment:
       # '%env:ABC_DEF' => syntax for use of .env values
-      POSTGRES_PASSWORD: '%env:POSTGRES_PASSWORD'  # admin password
-      POSTGRES_DB: '%env:POSTGRES_DB' # name of the database
-      POSTGRES_USER: '%env:POSTGRES_USER' #admin name
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # admin password
+      POSTGRES_DB: ${POSTGRES_DB} # name of the database
+      POSTGRES_USER: ${POSTGRES_USER} #admin name
     ports:
       - 5432:5432 # port of PC (left), port of Container (right) => is important to establish a connection between them
     volumes:
