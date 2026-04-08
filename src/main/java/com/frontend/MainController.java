@@ -27,12 +27,21 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
 
+        // add buttons to toggleGroup
         for (Node node : menuBarHBox.getChildren()) {
             if (!node.getId().equals("groupIgnore") && !node.getId().isEmpty()) {
                 ToggleButton tmp = (ToggleButton) node;
                 tmp.setToggleGroup(menuBarToggleGroup);
             }
         }
+
+        // prevent "untoggling" when clicking the toggled button
+        menuBarToggleGroup.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
+            if (newToggle == null) {
+                menuBarToggleGroup.selectToggle(oldToggle);
+            }
+        });
+
         selectMenuButton("home-view.fxml");
 
         // load a default site
