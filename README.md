@@ -16,9 +16,15 @@ MediaNode is an application which lets the user track all kinds of media (e.g. B
 - Creating an account
 - SignIn/SignOut
 - Browsing media (that is stored in the database)
-- Viewing Details from Medias
+- Searching for a medium with a search field
+- Viewing details from medias
 - Creating an entry either with the status `PLANNING` OR `CONSUMING` OR `COMPLETED`
 - Assign ratings for a specific media
+- View your activity log at your profile
+
+# Prerequisities
+- Docker Desktop
+- JDK version 17 or higher
 
 # Installation
 
@@ -32,10 +38,10 @@ https://github.com/Armin-Keric/MediaNode.git
 docker compose up -d
 ```
 >[!NOTE]
->Make sure you're running the Docker Desktop application.
+Make sure Docker Desktop is running. The command should start the `medianode` container automatically.
 
-> [!CAUTION]
-> This step does not work yet!
+3. Start the program
+
 
 
 # :rocket: Tech Stack
