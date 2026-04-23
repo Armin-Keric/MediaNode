@@ -26,6 +26,15 @@ MediaNode is an application which lets the user track all kinds of media (e.g. B
 - Docker Desktop
 - JDK version 17 or higher
 
+# Environment Variables
+To be able to establish a connection with the database you have to create a .env file that looks like this:
+
+```zsh
+POSTGRES_PASSWORD: YOUR_PASSWORD
+POSTGRES_DB: YOUR_DATABASE
+POSTGRES_USER: YOUR_USER
+```
+
 # Installation
 
 1. Clone the repository:
